@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdatePlan;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PlanController extends Controller
@@ -15,26 +16,24 @@ class PlanController extends Controller
     {
         $this->repository = $plan;
     }
-
+    //lista todos o planos na página inicial
     public function index()
     {
         $plans = $this->repository->all();
     
-        return view('admin.pages.plan.index',[
+        return view('admin.pages.plans.index',[
             'plans' => $plans,
         ]);
     }
-    
+    //view do create
     public function create()
     {
-        return view('admin.pages.plan.create');
+        return view('admin.pages.plans.create');
     }
-
-    public function store(Request $request)
+    //recebe a requisição da view create e persiste os dados
+    public function store(StoreUpdatePlan $request)
     {
-        $data = $request->all();
-        $data['url'] =  Str::kebab($request->name);
-        $this->repository->create($data);
+        $this->repository->create($request->all());
 
         return redirect()->route('plans.index');
     }
@@ -46,28 +45,58 @@ class PlanController extends Controller
         if(!$plan)
             return redirect()->back();
 
-            return view('admin.pages.plan.show',[
+            return view('admin.pages.plans.show',[
                 'plan' => $plan]);
     }
     //deletar um plano
     public function destroy($url)
+    {
+        $plan = $this->repository
+        ->with('details')   
+        ->where('url', $url)->first();         
+        
+        if(!$plan)
+            return redirect()->back();
+
+        if($plan->details->count() > 0)
+        return redirect()->back()
+                         ->with('error', 'Não pode deletar esse plano existe detalhes relacionados a ele');    
+
+        $plan->delete();
+
+        return redirect()->route('plans.index');
+    }
+    //filtra um plano pelo nome e pela descrição
+    public function search(Request $request)
+    {
+        $plans = $this->repository->search($request->filter);
+
+        return view('admin.pages.plans.index',[
+            'plans' => $plans,
+        ]);
+    }
+    // view do edit
+    public function edit($url)
     {
         $plan = $this->repository->where('url', $url)->first();
 
         if(!$plan)
             return redirect()->back();
 
-        $plan->delete();
-
-        return redirect()->route('plans.index');
+            return view('admin.pages.plans.edit',[
+                'plan' => $plan]);   
     }
-
-    public function search(Request $request)
+    //fazer a edição e persistir os dados
+    public function update(StoreUpdatePlan $request, $url)
     {
-        $plans = $this->repository->search($request->filter);
 
-        return view('admin.pages.plan.index',[
-            'plans' => $plans,
-        ]);
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+
+        $plan->update($request->all());
+
+            return redirect()->route('plans.index');
     }
 }

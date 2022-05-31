@@ -20,4 +20,9 @@ class Plan extends Model
 
         return $results;
     }
+    // um plano tem muitos detalhes 1:N
+    public function details(){
+        return $this->hasMany(DetailPlan::class);
+    }
+    
 }

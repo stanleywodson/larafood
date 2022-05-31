@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -239,7 +239,14 @@ return [
         // Sidebar items:
         [
             'text' => 'Planos',
-            'url'  => 'admin/plans'
+            'url'  => 'admin/plans',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'Perfis',
+            'url'  => 'admin/profiles',
+            'icon' => 'fa-duotone fa-address-card',
+            
         ],
         // [
         //     'text'        => 'pages',

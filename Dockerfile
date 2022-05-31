@@ -28,6 +28,10 @@ RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
+# Xdebug
+RUN pecl install xdebug-3.1.4 \
+&& docker-php-ext-enable xdebug    
+
 # Install redis
 RUN pecl install -o -f redis \
     &&  rm -rf /tmp/pear \

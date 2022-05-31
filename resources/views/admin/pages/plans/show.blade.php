@@ -4,6 +4,7 @@
 
 @section('content_header')
 <h1>Detalhes do plano: <b>{{$plan->name}}</b></h1>
+@include('admin.includes.alerts')
 @stop
 
 @section('content')
@@ -21,5 +22,6 @@
         <button type="submit" class="btn btn-danger">Excluir</button>
     </form>
     </div>
+    
 </div> 
 @endsection  
