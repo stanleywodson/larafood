@@ -9,10 +9,15 @@ Route::get('/', function () {
     echo '<h1>Stanley Wodson Carneiro de Souza</h1>';
 });
 /**
+ * Route Permission
+ */
+Route::resource('admin/permission', 'App\Http\Controllers\ACL\PermissionController');
+/**
  * Route Profile
  */ 
-
+//Route::any('profiles/search', 'App\Http\Controllers\ACL\ProfileController', 'search')->name('profiles.search');
 Route::resource('admin/profiles', 'App\Http\Controllers\ACL\ProfileController');
+
 /**
  * Route Detaiils
  */ 

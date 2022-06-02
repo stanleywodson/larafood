@@ -21,6 +21,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
+        <!-- formulário de pesquisa -->
         <form method="POST" action="{{ route('plans.search') }}" class="form form-inline">
             @csrf
             <div class="row">     

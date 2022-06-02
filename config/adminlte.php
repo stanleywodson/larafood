@@ -248,6 +248,12 @@ return [
             'icon' => 'fa-duotone fa-address-card',
             
         ],
+        [
+            'text' => 'Permissões',
+            'url'  => 'admin/permission',
+            'icon' => 'fa-duotone fa-address-card',
+            
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',

@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Perfis')
+@section('title', 'Permissões')
 
 @section('content_header')
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 <div class="row">
     <div class="col-md-10">
-        <h1>Perfis</h1>
+        <h1>Permissões</h1>
         @include('admin.includes.alerts')
     </div>
-    <div class="col-6 col-md-2"><a href="{{route('profiles.create')}}" class="btn btn-dark">Adicionar - Perfil</a></div>
+    <div class="col-6 col-md-2"><a href="{{route('permission.create')}}" class="btn btn-dark"><i class="fa-solid fa-plus"></i></a></div>
 </div>
 
 <!-- <ol class="breadcrumb">
@@ -26,14 +26,6 @@
     </div>
 </div> -->
 <div class="card-body">
-    
-    <!-- <form method="POST" action="" class="form form-inline">
-        @csrf
-        <div class="row">
-            <input type="text" name="filter" class="form-control" placeholder="Nome do Usuário">
-            <button type="submit" class="btn btn-dark">Pesquisar</button>
-        </div>
-    </form> -->
     <!-- listagem dos planos -->
     <table class="table table-condensed">
         <thead>
@@ -44,14 +36,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($profiles as $profile)
+            @foreach($permission as $permission)
             <tr>
-                <td>{{ucwords($profile->name)}}</td>
-                <td>{{$profile->description}}</td>
+                <td>{{ucwords($permission->name)}}</td>
+                <td>{{$permission->description}}</td>
                 <td style="width: 350px;">
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
-                    <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-info">VER</a>
-                    <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-warning">EDITAR</a>
+                    <a href="{{ route('permission.show', $permission->id) }}" class="btn btn-info">VER</a>
+                    <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-warning">EDITAR</a>
                 </td>
             </tr>
             @endforeach
@@ -59,6 +51,7 @@
     </table>
 
 </div>
+
 @stop
 
 @section('css')

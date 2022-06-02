@@ -3,7 +3,7 @@
 @section('title', 'Detalhes do Plano')
 
 @section('content_header')
-<h1>Detalhes do plano: <b>{{$plan->name}}</b></h1>
+<h1>Informações - Plano</b></h1>
 @include('admin.includes.alerts')
 @stop
 

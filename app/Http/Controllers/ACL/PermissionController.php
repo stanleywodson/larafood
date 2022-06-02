@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\ACL;
 
-use App\Models\Profile;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateProfiles;
 
-class ProfileController extends Controller
+class PermissionController extends Controller
 {
     protected $repository;
     
-    public function __construct(Profile $profile)
+    public function __construct(Permission $permission)
     {
-        $this->repository = $profile;
+        $this->repository = $permission;
     }
     /**
      * Display a listing of the resource.
@@ -22,17 +22,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = $this->repository->all();
+        $permission = $this->repository->all();
 
-        return view('admin.pages.profiles.index', compact('profiles'));
+        return view('admin.pages.permission.index', compact('permission'));
     }
-
-    // public function search(Request $request)
-    // {
-    //     $profiles = $this->repository->search($request->filter);
-
-    //     return view('admin.pages.profiles.index', compact('profiles'));
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -41,7 +34,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.profiles.create');
+        return view('admin.pages.permission.create');
     }
 
     /**
@@ -54,7 +47,7 @@ class ProfileController extends Controller
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('profiles.index')
+        return redirect()->route('permission.index')
                          ->with('success', 'Perfil criado com sucesso!');
     }
 
@@ -66,12 +59,12 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $profile = $this->repository->where('id', $id)->first();
+        $permission = $this->repository->where('id', $id)->first();
         
-        if(!$profile)
+        if(!$permission)
             return redirect()->back();
 
-        return view('admin.pages.profiles.show', compact('profile'));
+        return view('admin.pages.permission.show', compact('permission'));
     }
 
     /**
@@ -82,12 +75,12 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $profile = $this->repository->where('id', $id)->first();
+        $permission = $this->repository->where('id', $id)->first();
 
-        if(!$profile)
+        if(!$permission)
             return redirect()->back();
 
-        return view('admin.pages.profiles.edit', compact('profile'));
+        return view('admin.pages.permission.edit', compact('permission'));
     }
 
     /**
@@ -99,14 +92,14 @@ class ProfileController extends Controller
      */
     public function update(StoreUpdateProfiles $request, $id)
     {
-        $profile = $this->repository->where('id', $id)->first();
+        $permission = $this->repository->where('id', $id)->first();
 
-        if(!$profile)
+        if(!$permission)
             return redirect()->back();
 
-        $profile->update($request->all());
+        $permission->update($request->all());
 
-        return redirect()->back()->with('update','Atualizado com sucesso!');
+        return redirect()->route('permission.index')->with('update','Atualizado com sucesso!');
         
     }
 
@@ -118,11 +111,11 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        $profile = $this->repository->where('id', $id)->first();
-        if(!$profile)
+        $permission = $this->repository->where('id', $id)->first();
+        if(!$permission)
             return redirect()->back();
 
-        $profile->delete();
-        return redirect()->route('profiles.index')->with('delete', 'Deletado com sucesso!');
+        $permission->delete();
+        return redirect()->route('permission.index')->with('delete', 'Deletado com sucesso!');
     }
 }
