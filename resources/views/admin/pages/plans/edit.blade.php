@@ -15,7 +15,7 @@
 
             @include('admin.includes.alerts')
 
-            @include('admin.includes.form')
+            @include('admin.pages.plans._partials.form_plan')
             
         </form>
     </div>

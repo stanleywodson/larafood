@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\ACL;
+use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use App\Models\DetailPlan;
 use App\Http\Requests\StoreUpdateDetailPlan;

@@ -37,4 +37,10 @@
             </div>
             @endif
 
+            @if(session('permission'))
+            <div class="alert alert-success">
+                {{session('permission')}}
+            </div>
+            @endif
+
             

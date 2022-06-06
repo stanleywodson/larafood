@@ -251,7 +251,7 @@ return [
         [
             'text' => 'Permissões',
             'url'  => 'admin/permission',
-            'icon' => 'fa-duotone fa-address-card',
+            'icon' => 'f30d\f30d',
             
         ],
         // [

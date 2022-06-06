@@ -15,7 +15,7 @@
             @csrf
             @method('PUT')
             
-            @include('admin.includes.form_permission')
+            @include('admin.pages.permission._partials.form_permission')
             
         </form>
     </div>

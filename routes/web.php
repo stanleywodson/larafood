@@ -1,28 +1,40 @@
 <?php
+use App\Http\Controllers\ACL\{PermissionProfileController, 
+                              ProfileController, 
+                              PermissionController, 
+                              PlanController,
+                              PlanDetailController};
 
-use App\Http\Controllers\Admin\DetailPlanController;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\PlanDetailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     echo '<h1>Stanley Wodson Carneiro de Souza</h1>';
 });
-/**
- * Route Permission
- */
-Route::resource('admin/permission', 'App\Http\Controllers\ACL\PermissionController');
-/**
- * Route Profile
- */ 
-//Route::any('profiles/search', 'App\Http\Controllers\ACL\ProfileController', 'search')->name('profiles.search');
-Route::resource('admin/profiles', 'App\Http\Controllers\ACL\ProfileController');
+
 
 /**
  * Route Detaiils
  */ 
-Route::prefix('admin')->group(function(){
-   
+    Route::prefix('admin')->group(function(){
+
+    /**
+ * Permission x Profile
+ */
+    Route::post('/profiles/{id}/', [PermissionProfileController::class, 'attachPermissionProfile'])->name('profiles.permissions.attach');
+    Route::get('/profiles/{id}/create', [PermissionProfileController::class, 'permissionsAvailable'])->name('profiles.permissions.available');
+    Route::get('/profiles/{id}/permissions', [PermissionProfileController::class, 'permissions'])->name('profiles.permissions');
+/**
+ * Route Permission
+ */
+    Route::resource('/permission', PermissionController::class);
+/**
+ * Route Profile
+ */ 
+    Route::any('/profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
+    Route::resource('/profiles', ProfileController::class);
+/**
+ * Route Detaiils Plan
+ */   
     Route::delete('/plans/{url}/detail/{idDetail}/destroy', [PlanDetailController::class, 'destroy'])->name('details.plans.destroy');
     Route::get('/plans/{url}/detail/create', [PlanDetailController::class, 'create'])->name('details.plans.create');
     Route::get('/plans/{url}/detail/{idDetail}', [PlanDetailController::class, 'show'])->name('details.plans.show');

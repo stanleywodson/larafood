@@ -27,12 +27,12 @@ class ProfileController extends Controller
         return view('admin.pages.profiles.index', compact('profiles'));
     }
 
-    // public function search(Request $request)
-    // {
-    //     $profiles = $this->repository->search($request->filter);
+    public function search(Request $request)
+    {
+        $profiles = $this->repository->search($request->filter);
 
-    //     return view('admin.pages.profiles.index', compact('profiles'));
-    // }
+        return view('admin.pages.profiles.index', compact('profiles'));
+    }
 
     /**
      * Show the form for creating a new resource.

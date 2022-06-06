@@ -15,7 +15,7 @@
             @csrf
             @method('PUT')
             
-            @include('admin.includes.form_profile')
+            @include('admin.pages.profiles._partials.form_profile')
             
         </form>
     </div>

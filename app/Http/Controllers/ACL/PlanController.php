@@ -1,7 +1,6 @@
 <?php
-
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\ACL;
+use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -41,7 +40,7 @@ class PlanController extends Controller
     public function show($url)
     {
         $plan = $this->repository->where('url', $url)->first();
-
+        
         if(!$plan)
             return redirect()->back();
 

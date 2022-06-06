@@ -14,7 +14,7 @@
     <div class="card-header">
         <form method="post" action="{{route('profiles.store')}}">
             @csrf
-            @include('admin.includes.form_profile')
+            @include('admin.pages.profiles._partials.form_profile')
         </form>
     </div>
 </div>

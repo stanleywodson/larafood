@@ -14,7 +14,7 @@
     <div class="card-header">
         <form method="post" action="{{route('permission.store')}}">
             @csrf
-            @include('admin.includes.form_permission')
+            @include('admin.pages.permission._partials.form_permission')
         </form>
     </div>
 </div>

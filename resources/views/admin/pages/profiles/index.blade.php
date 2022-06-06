@@ -27,13 +27,13 @@
 </div> -->
 <div class="card-body">
     
-    <!-- <form method="POST" action="" class="form form-inline">
+    <form method="POST" action="{{ route('profiles.search')}}" class="form form-inline">
         @csrf
         <div class="row">
             <input type="text" name="filter" class="form-control" placeholder="Nome do Usuário">
             <button type="submit" class="btn btn-dark">Pesquisar</button>
         </div>
-    </form> -->
+    </form>
     <!-- listagem dos planos -->
     <table class="table table-condensed">
         <thead>
@@ -52,6 +52,7 @@
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
                     <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-info">VER</a>
                     <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-warning">EDITAR</a>
+                    <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-success">PERM</i></a>
                 </td>
             </tr>
             @endforeach
