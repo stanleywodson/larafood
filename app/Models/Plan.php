@@ -24,5 +24,20 @@ class Plan extends Model
     public function details(){
         return $this->hasMany(DetailPlan::class);
     }
+    // um plano tem muitos perfis N:N
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+
+    public function permissionsAvailable()
+    {
+        $profiles = Profile::whereNotIn('profiles.id', function($query) {
+            $query->select('plan_profile.profile_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.plan_id={$this->id}");
+        });
+        return $profiles;
+    }
     
 }

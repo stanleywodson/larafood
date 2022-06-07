@@ -53,6 +53,7 @@
                     <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-info">VER</a>
                     <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-warning">EDITAR</a>
                     <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-success">PERM</i></a>
+                    <a href="{{ route('profiles.plans', $profile->id) }}" class="btn btn-info">PLANOS</a>
                 </td>
             </tr>
             @endforeach

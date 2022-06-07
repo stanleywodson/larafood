@@ -52,6 +52,7 @@
                     <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary">DETALHES</a>
                     <a href="{{route('plans.show', $plan->url)}}" class="btn btn-info">VER</a>
                     <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning">EDITAR</a>
+                    <a href="{{route('plans.profiles', $plan->id)}}" class="btn btn-secondary">PERFIL</a>
                 </td>
             </tr>
             @endforeach

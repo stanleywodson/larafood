@@ -1,15 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Permissões')
+@section('title', 'Profiles')
 
 @section('content_header')
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 <div class="row">
     <div class="col-md-10">
-        <h1>Permissões - <b>{{$profile->name}}</b></h1>
+        <h1>Vincular Perfis- <b>{{$plan->name}}</b></h1>
         @include('admin.includes.alerts')
     </div>
-    <div class="col-6 col-md-2"><a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark">Adicionar - Permissão</a></div>
 </div>
 
 <!-- <ol class="breadcrumb">
@@ -26,19 +25,27 @@
     <table class="table table-condensed">
         <thead>
             <tr>
+                <th width="50px">#</th>
                 <th>Nome</th>
-                <th>Descrição</th>
-                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($permissions as $permission)
-            <tr>
-                <td>{{$permission->name}}</td>
-                <td>{{$permission->description}}</td>
-                <td><a href="{{ route('profiles.permissions.detach',[$profile->id, $permission->id]) }}" class="btn btn-danger">DESVINCULAR</a></td>
+            <form action="{{ route('plans.profiles.attach', $plan->id) }}" method="post">
+                @csrf
+            @foreach($profiles as $profile)
+            <tr> 
+                <td>
+                    <input type="checkbox" name="profiles[]" value="{{$profile->id}}">
+                </td>
+                <td>
+                    {{$profile->name}}
+                </td>
             </tr>
             @endforeach
+            <tr>
+                <td colspan="500"><button type="submit" class="btn btn-success">Vincular</button></td>
+            </tr>
+            </form>
         </tbody>
     </table>
 

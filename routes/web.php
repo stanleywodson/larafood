@@ -1,7 +1,8 @@
 <?php
 use App\Http\Controllers\ACL\{PermissionProfileController, 
                               ProfileController, 
-                              PermissionController, 
+                              PermissionController,
+                              PlanProfileController, 
                               PlanController,
                               PlanDetailController};
 
@@ -16,13 +17,25 @@ Route::get('/', function () {
  * Route Detaiils
  */ 
     Route::prefix('admin')->group(function(){
-
-    /**
- * Permission x Profile
+/**
+ * Plan x Profile
  */
+    Route::get('/plans/{id}/profile/{idProfile}/detach', [PlanProfileController::class, 'detachPermissionProfile'])->name('plans.profiles.detach');
+    Route::post('/plans/{id}/', [PlanProfileController::class, 'attachPermissionProfile'])->name('plans.profiles.attach');
+    Route::get('/plans/{id}/create', [PlanProfileController::class, 'permissionsAvailable'])->name('plans.profiles.available');
+    Route::get('/plans/{id}/profiles', [PlanProfileController::class, 'profiles'])->name('plans.profiles');
+    //Profiles x Plan
+    Route::get('/profiles/{id}/plans', [PlanProfileController::class, 'plans'])->name('profiles.plans');
+/**
+ * Profile x Permission
+ */
+    Route::get('/profiles/{id}/permission/{idPermission}/detach', [PermissionProfileController::class, 'detachPermissionProfile'])->name('profiles.permissions.detach');
     Route::post('/profiles/{id}/', [PermissionProfileController::class, 'attachPermissionProfile'])->name('profiles.permissions.attach');
     Route::get('/profiles/{id}/create', [PermissionProfileController::class, 'permissionsAvailable'])->name('profiles.permissions.available');
     Route::get('/profiles/{id}/permissions', [PermissionProfileController::class, 'permissions'])->name('profiles.permissions');
+    //Permission x Profile
+    Route::get('/permissions/{id}/profiles', [PermissionProfileController::class, 'profiles'])->name('permissions.profiles');
+
 /**
  * Route Permission
  */

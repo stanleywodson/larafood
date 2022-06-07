@@ -9,7 +9,7 @@
         <h1>Permissões</h1>
         @include('admin.includes.alerts')
     </div>
-    <div class="col-6 col-md-2"><a href="{{route('permission.create')}}" class="btn btn-dark"><i class="fa-solid fa-plus"></i></a></div>
+    <div class="col-6 col-md-2"><a href="{{route('permission.create')}}" class="btn btn-dark">ADD. PERMISSÃO</a></div>
 </div>
 
 <!-- <ol class="breadcrumb">
@@ -43,7 +43,8 @@
                 <td style="width: 350px;">
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
                     <a href="{{ route('permission.show', $permission->id) }}" class="btn btn-info">VER</a>
-                    <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-warning">EDITAR</a>
+                    <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-warning">EDIT</a>
+                    <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-primary">PERFIS</i></a>
                 </td>
             </tr>
             @endforeach
