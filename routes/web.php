@@ -5,18 +5,17 @@ use App\Http\Controllers\ACL\{PermissionProfileController,
                               PlanProfileController, 
                               PlanController,
                               PlanDetailController};
-
+                              
+use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    echo '<h1>Stanley Wodson Carneiro de Souza</h1>';
-});
+Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
 
 /**
  * Route Detaiils
  */ 
-    Route::prefix('admin')->group(function(){
+    Route::prefix('admin')->middleware('auth')->group(function(){
 /**
  * Plan x Profile
  */
@@ -46,7 +45,7 @@ Route::get('/', function () {
     Route::any('/profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
     Route::resource('/profiles', ProfileController::class);
 /**
- * Route Detaiils Plan
+ * Route Details Plan
  */   
     Route::delete('/plans/{url}/detail/{idDetail}/destroy', [PlanDetailController::class, 'destroy'])->name('details.plans.destroy');
     Route::get('/plans/{url}/detail/create', [PlanDetailController::class, 'create'])->name('details.plans.create');
@@ -74,3 +73,8 @@ Route::get('/', function () {
  */
     Route::get('/', [PlanController::class, 'index'])->name('admin.index');
 });
+/**
+ * Route Auth
+ */
+    Auth::routes();
+
