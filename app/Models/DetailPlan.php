@@ -14,7 +14,6 @@ class DetailPlan extends Model
     
 
     //detalhe pertence a um plano -- 1:1
- 
     public function plan()
     {
         return $this->belongsTo(Plan::class);

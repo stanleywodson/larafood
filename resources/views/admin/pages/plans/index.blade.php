@@ -49,7 +49,7 @@
                 <td>R$ - {{number_format($plan->price, 2, ',','.')}}</td>
                 <td>{{$plan->description}}</td>
                 <td style="width: 350px;">
-                    <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary">DETALHES</a>
+                    <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary">ADD/VER/DET</a>
                     <a href="{{route('plans.show', $plan->url)}}" class="btn btn-info">VER</a>
                     <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning">EDITAR</a>
                     <a href="{{route('plans.profiles', $plan->id)}}" class="btn btn-secondary">PERFIL</a>

@@ -65,10 +65,8 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $profile = $this->repository->where('id', $id)->first();
-        
-        if(!$profile)
+    {     
+        if(!$profile = $this->repository->where('id', $id)->first())
             return redirect()->back();
 
         return view('admin.pages.profiles.show', compact('profile'));
@@ -82,9 +80,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $profile = $this->repository->where('id', $id)->first();
-
-        if(!$profile)
+        if(!$profile = $this->repository->where('id', $id)->first())
             return redirect()->back();
 
         return view('admin.pages.profiles.edit', compact('profile'));
@@ -99,9 +95,7 @@ class ProfileController extends Controller
      */
     public function update(StoreUpdateProfiles $request, $id)
     {
-        $profile = $this->repository->where('id', $id)->first();
-
-        if(!$profile)
+        if(!$profile = $this->repository->where('id', $id)->first())
             return redirect()->back();
 
         $profile->update($request->all());
@@ -117,9 +111,8 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $profile = $this->repository->where('id', $id)->first();
-        if(!$profile)
+    {       
+        if(!$profile = $this->repository->where('id', $id)->first())
             return redirect()->back();
 
         $profile->delete();

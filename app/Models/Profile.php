@@ -20,18 +20,20 @@ class Profile extends Model
         return $results;
     }
     /**
-     * Relationship ManyToMany
+     * Relationship ManyToMany,um perfil pertence a muitas permissões N:N
      */
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);
     }
-
+    /**
+     * um perfil pertence a muitos planos N:N
+     */
     public function plans()
     {
         return $this->belongsToMany(Plan::class);
     }
-
+    
     public function permissionsAvailable()
     {
         $permissions = Permission::whereNotIn('permissions.id', function($query) {

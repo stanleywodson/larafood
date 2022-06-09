@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Tenant;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,10 +17,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'Stanley',
-            'email' => 'stanley.wodson@gmail.com',
-            'password' => Hash::make(123456),
+        $tenant = Tenant::first();
+        $tenant->users->create([
+            'company_id' => $tenant->id,
+            'name' => 'Administrator',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make(123456), // password
         ]);
     }
 }

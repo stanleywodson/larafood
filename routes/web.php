@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
 
-/**
- * Route Detaiils
- */ 
     Route::prefix('admin')->middleware('auth')->group(function(){
 /**
  * Plan x Profile
