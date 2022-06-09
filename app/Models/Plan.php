@@ -20,20 +20,6 @@ class Plan extends Model
 
         return $results;
     }
-    // um plano tem muitos detalhes 1:N
-    public function details(){
-        return $this->hasMany(DetailPlan::class);
-    }
-    // um plano tem muitos perfis N:N
-    public function profiles()
-    {
-        return $this->belongsToMany(Profile::class);
-    }
-
-    public function tenantis()
-    {
-        return $this->hasMany(Tenant::class);
-    }
 
     public function permissionsAvailable()
     {
@@ -44,5 +30,21 @@ class Plan extends Model
         });
         return $profiles;
     }
+
+    // um plano tem muitos detalhes 1:N
+    public function details(){
+        return $this->hasMany(DetailPlan::class);
+    }
+    // um plano tem muitos perfis N:N
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+    // um plano tem muitas empresas 1:N
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
+
     
 }

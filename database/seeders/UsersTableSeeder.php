@@ -18,8 +18,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $tenant = Tenant::first();
-        $tenant->users->create([
-            'company_id' => $tenant->id,
+        
+        $tenant->users()->create([
             'name' => 'Administrator',
             'email' => 'admin@admin.com',
             'password' => Hash::make(123456), // password
