@@ -8,7 +8,10 @@ use App\Http\Controllers\ACL\{PermissionProfileController,
                               
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
-
+/**
+ * Route Site
+ */
+Route::get('/plan/{url}', [SiteController::class, 'plan'])->name('plan.subscription');
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
 

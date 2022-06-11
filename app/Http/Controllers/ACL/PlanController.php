@@ -75,9 +75,7 @@ class PlanController extends Controller
     // view do edit
     public function edit($url)
     {
-        $plan = $this->repository->where('url', $url)->first();
-
-        if(!$plan)
+        if(!$plan = $this->repository->where('url', $url)->first())
             return redirect()->back();
 
             return view('admin.pages.plans.edit',[
@@ -87,9 +85,7 @@ class PlanController extends Controller
     public function update(StoreUpdatePlan $request, $url)
     {
 
-        $plan = $this->repository->where('url', $url)->first();
-
-        if(!$plan)
+        if(!$plan = $this->repository->where('url', $url)->first())
             return redirect()->back();
 
         $plan->update($request->all());
