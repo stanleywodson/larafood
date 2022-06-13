@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\ACL;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Http\Request;

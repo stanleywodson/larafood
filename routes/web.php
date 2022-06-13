@@ -1,11 +1,10 @@
 <?php
-use App\Http\Controllers\ACL\{PermissionProfileController, 
+use App\Http\Controllers\Admin\ACL\{PermissionProfileController, 
                               ProfileController, 
                               PermissionController,
                               PlanProfileController, 
-                              PlanController,
-                              PlanDetailController};
-                              
+};
+use App\Http\Controllers\Admin\{PlanController, PlanDetailController};                              
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 /**
