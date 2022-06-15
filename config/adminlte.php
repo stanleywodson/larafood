@@ -245,13 +245,19 @@ return [
         [
             'text' => 'Perfis',
             'url'  => 'admin/profiles',
-            'icon' => 'fa-duotone fa-address-card',
+            'icon' => 'fas fa-fw fa-user',
             
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permission',
-            'icon' => 'f30d\f30d',
+            'icon' => 'fas fa-fw fa-lock',
+            
+        ],
+        [
+            'text' => 'Usuários',
+            'url'  => 'admin/users',
+            'icon' => 'fas fa-fw fa-user',
             
         ],
         // [

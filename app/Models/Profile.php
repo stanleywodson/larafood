@@ -41,7 +41,7 @@ class Profile extends Model
             $query->from('permission_profile');
             $query->whereRaw("permission_profile.profile_id={$this->id}");
         });
-
+        
         return $permissions;
     }
 }

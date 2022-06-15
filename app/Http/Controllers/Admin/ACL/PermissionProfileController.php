@@ -40,9 +40,13 @@ class PermissionProfileController extends Controller
     {
         if (!$profile = $this->profile->find($idProfile))
             return redirect()->back();
-
-        //$permissions = $profile->permissionsAvailable();
+        /**
+         * identificar o que não está funcionando
+         * $permissions = $profile->permissionsAvailable();
+         */
+        
         $permissions = $this->permission::all();
+        
         return view('admin.pages.profiles.permissions.available', compact('profile', 'permissions'));
     }
 

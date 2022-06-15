@@ -4,17 +4,21 @@ use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
                               PermissionController,
                               PlanProfileController, 
 };
-use App\Http\Controllers\Admin\{PlanController, PlanDetailController};                              
+use App\Http\Controllers\Admin\{PlanController, PlanDetailController, UserController};                              
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 /**
  * Route Site
  */
-Route::get('/plan/{url}', [SiteController::class, 'plan'])->name('plan.subscription');
-Route::get('/', [SiteController::class, 'index'])->name('site.home');
+    Route::get('/plan/{url}', [SiteController::class, 'plan'])->name('plan.subscription');
+    Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
 
-    Route::prefix('admin')->middleware('auth')->group(function(){
+Route::prefix('admin')->middleware('auth')->group(function(){
+/**
+ * Route Users
+ */ 
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');                                                                  
 /**
  * Plan x Profile
  */

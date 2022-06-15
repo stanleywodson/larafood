@@ -40,8 +40,13 @@ class PlanProfileController extends Controller
     {
         if (!$plan = $this->plan->find($idPlan))
             return redirect()->back();
-        //$profiles = $plan->permissionsAvailable();
+        /**
+         * identificar o que não está funcionando / ligado ao model plan com mesmo nome
+         *  $profiles = $plan->permissionsAvailable();
+         * */    
+        
         $profiles = $this->profile::all();
+        
         return view('admin.pages.plans.profiles.available', compact('profiles', 'plan'));
     }
 

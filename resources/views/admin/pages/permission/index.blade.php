@@ -44,7 +44,7 @@
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
                     <a href="{{ route('permission.show', $permission->id) }}" class="btn btn-info">VER</a>
                     <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-warning">EDIT</a>
-                    <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-primary">PERFIS</i></a>
+                    <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-primary"><i class="fas fa-fw fa-user"></i></a>
                 </td>
             </tr>
             @endforeach
