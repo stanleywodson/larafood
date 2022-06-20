@@ -38,21 +38,25 @@ class PlanProfileController extends Controller
 
     public function permissionsAvailable($idPlan)
     {
+
         if (!$plan = $this->plan->find($idPlan))
             return redirect()->back();
-        /**
-         * identificar o que não está funcionando / ligado ao model plan com mesmo nome
-         *  $profiles = $plan->permissionsAvailable();
-         * */    
-        
-        $profiles = $this->profile::all();
-        
+
+        $profiles = $plan->permissionsAvailable();
+
+        // $test = collect($plan->profiles)->map(function($r){
+        //     return $r->id;
+        // })->toArray();
+
+        // $profiles = Profile::whereNotIn('id', $test)->get();
+
         return view('admin.pages.plans.profiles.available', compact('profiles', 'plan'));
     }
 
     //vincular uma perfil ao plano
     public function attachPermissionProfile(Request $request, $idPlan)
     {
+       
         if (!$plan = $this->plan->find($idPlan))
             return redirect()->back();
 

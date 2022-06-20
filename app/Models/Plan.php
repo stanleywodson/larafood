@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Plan extends Model
 {
@@ -23,16 +22,13 @@ class Plan extends Model
     }
 
     public function permissionsAvailable()
-    {
-        $plan_profile = DB::table('plan_profile')->select('plan_profile.profile_id')->whereRaw("plan_profile.plan_id={$this->id}");
+    {        
+        $profiles = Profile::whereNotIn('profiles.id', function($query) {
+            $query->select('plan_profile.profile_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.plan_id={$this->id}");
+        })->get();
 
-        $profiles = Profile::whereNotIn('profiles.id', $plan_profile);
-        
-        // $profiles = Profile::whereNotIn('profiles.id', function($query) {
-        //     $query->select('plan_profile.profile_id');
-        //     $query->from('plan_profile');
-        //     $query->whereRaw("plan_profile.plan_id={$this->id}");
-        // });
         return $profiles;
     }
 

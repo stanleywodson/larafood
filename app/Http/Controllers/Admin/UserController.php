@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUsers;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -22,7 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->all();
+        $users = $this->repository->tenantUser()->get();
+        //$users = $this->repository->where('tenant_id', auth()->user()->tenant_id)->get(); //forma que traz o mesmo resultado de exemplo de cima
 
         return view('admin.pages.users.index', compact('users'));
     }
@@ -54,7 +56,9 @@ class UserController extends Controller
     public function store(StoreUpdateusers $request)
     {
         $data = $request->all();
+        
         $data['tenant_id'] = auth()->user()->tenant->id;
+        $data['password'] = Hash::make($data['password']);
 
         $this->repository->create($data);
 
@@ -68,11 +72,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {     
-        if(!$user = $this->repository->where('id', $id)->first())
+        if(!$user = $this->repository->tenantUser()->with('tenant')->where('id', $id)->first())
             return redirect()->back();
-
+   
         return view('admin.pages.users.show', compact('user'));
     }
 
@@ -84,7 +88,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if(!$user = $this->repository->where('id', $id)->first())
+        if(!$user = $this->repository->tenantUser()->where('id', $id)->first())
             return redirect()->back();
 
         return view('admin.pages.users.edit', compact('user'));
@@ -97,14 +101,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateusers $request, $id)
+    public function update(StoreUpdateusers $request, int $id)
     {
-        if(!$user = $this->repository->where('id', $id)->first())
+        if(!$user = $this->repository->tenantUser()->where('id', $id)->first())
             return redirect()->back();
 
-        $user->update($request->all());
+        $data = $request->only('name');
+        
+        if($request->password){
+            $data['password'] = Hash::make($request->password);
+            
+        }
+        $user->update($data);
 
-        return redirect()->back()->with('update','Atualizado com sucesso!');
+        return redirect()->route('users.index')->with('update','Atualizado com sucesso!');
         
     }
 
@@ -114,9 +124,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {       
-        if(!$user = $this->repository->where('id', $id)->first())
+        if(!$user = $this->repository->tenantUser()->where('id', $id)->first())
             return redirect()->back();
 
         $user->delete();

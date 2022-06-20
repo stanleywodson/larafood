@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -43,12 +43,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+        /**
+     * Scope a query to only include popular users.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTenantUser(Builder $query)
+    {
+        return $query->where('tenant_id', auth()->user()->tenant_id);
+    }
 
     public function search($filter)
     {
         $results = $this->where('name', 'LIKE', "%{$filter}%")
         ->orWhere('name', 'LIKE', "%{$filter}%")
         ->orWhere('email', 'LIKE', "%{$filter}%")
+        ->tenantUser()
         ->get();
 
     return $results;

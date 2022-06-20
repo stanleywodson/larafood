@@ -39,7 +39,7 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Descrição</th>
+                <th>E-mail</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -47,7 +47,7 @@
             @foreach($users as $user)
             <tr>
                 <td>{{ucwords($user->name)}}</td>
-                <td>{{$user->description}}</td>
+                <td>{{$user->email}}</td>
                 <td style="width: 350px;">
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">VER</a>

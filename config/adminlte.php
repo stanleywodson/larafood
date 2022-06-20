@@ -240,7 +240,7 @@ return [
         [
             'text' => 'Planos',
             'url'  => 'admin/plans',
-            'icon' => 'far fa-fw fa-glass',
+            'icon' => 'far fa-fw fa-address-book',
         ],
         [
             'text' => 'Perfis',

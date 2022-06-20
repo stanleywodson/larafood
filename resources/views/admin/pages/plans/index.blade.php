@@ -26,7 +26,7 @@
             @csrf
             <div class="row">     
                     <input type="text" name="filter" class="form-control" placeholder="Nome do Plano">
-                    <button type="submit" class="btn btn-dark">Pesquisar</button>
+                    <button type="submit" class="btn btn-dark"><i class="fa fa-search" aria-hidden="true"></i></button>
             </div>
         </form>
     </div>
@@ -49,9 +49,9 @@
                 <td>R$ - {{number_format($plan->price, 2, ',','.')}}</td>
                 <td>{{$plan->description}}</td>
                 <td style="width: 350px;">
-                    <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary">ADD/VER/DET</a>
-                    <a href="{{route('plans.show', $plan->url)}}" class="btn btn-info">VER</a>
-                    <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning">EDITAR</a>
+                    <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary"><i class="fa fa-adjust" aria-hidden="true"></i></a>
+                    <a href="{{route('plans.show', $plan->url)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                    <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning"><i class="fas fa-edit"></i></i></a>
                     <a href="{{route('plans.profiles', $plan->id)}}" class="btn btn-secondary"><i class="far fa-fw fa-address-book"></i></a>
                 </td>
             </tr>
