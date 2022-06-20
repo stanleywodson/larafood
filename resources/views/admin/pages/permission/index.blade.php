@@ -11,11 +11,11 @@
     </div>
     <div class="col-6 col-md-2"><a href="{{route('permission.create')}}" class="btn btn-dark">ADD. PERMISSÃO</a></div>
 </div>
-
-<!-- <ol class="breadcrumb">
+<!-- breadcrumb -->
+<ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Planos</a></li>
-</ol> -->
+    <li class="breadcrumb-item"><a href="{{ route('permission.index') }}">Permissões</a></li>
+</ol>
 
 @stop
 
@@ -44,7 +44,7 @@
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
                     <a href="{{ route('permission.show', $permission->id) }}" class="btn btn-info">VER</a>
                     <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-warning">EDIT</a>
-                    <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-primary"><i class="fas fa-fw fa-user"></i></a>
+                    <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-secondary"><i class="far fa-fw fa-address-book"></i></a>
                 </td>
             </tr>
             @endforeach

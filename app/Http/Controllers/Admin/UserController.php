@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreUpdateUsers;
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateUsers;
 
 class UserController extends Controller
 {
@@ -28,6 +29,7 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
+
         $users = $this->repository->search($request->filter);
 
         return view('admin.pages.users.index', compact('users'));

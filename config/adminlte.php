@@ -240,12 +240,12 @@ return [
         [
             'text' => 'Planos',
             'url'  => 'admin/plans',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'far fa-fw fa-glass',
         ],
         [
             'text' => 'Perfis',
             'url'  => 'admin/profiles',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'far fa-fw fa-address-book',
             
         ],
         [
