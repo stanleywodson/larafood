@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Cadastrar Usuário')
+@section('title', 'Cadastrar Categoria')
 
 @section('content_header')
 <h1>Cadastrar</h1>
@@ -9,18 +9,13 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form method="post" action="{{route('users.store')}}">
+        <form method="post" action="{{route('categories.store')}}">
             @csrf
 
             @include('admin.includes.alerts')
 
-            @include('admin.pages.users._partials.form_user_create')
+            @include('admin.pages.categories._partials.form_categories')
         </form>
     </div>
 </div>
 @endsection
-@section('js')
-<script>
-    console.log('Hi!');
-</script>
-@stop

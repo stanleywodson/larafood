@@ -240,7 +240,7 @@ return [
         [
             'text' => 'Planos',
             'url'  => 'admin/plans',
-            'icon' => 'far fa-fw fa-address-book',
+            'icon' => 'fa fa-th',
         ],
         [
             'text' => 'Perfis',
@@ -258,6 +258,12 @@ return [
             'text' => 'Usuários',
             'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
+            
+        ],
+        [
+            'text' => 'Categorias',
+            'url'  => 'admin/categories',
+            'icon' => 'fa fa-list',
             
         ],
         // [

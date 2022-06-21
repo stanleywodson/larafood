@@ -6,11 +6,9 @@
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 <div class="row">
     <div class="col-md-10">
-        <h1>Planos </h1>
+        <h1>Planos <a href="{{route('plans.create')}}" class="btn btn-dark"><i class="fa fa-plus-square"></i></a></h1>
     </div>
-    <div class="col-6 col-md-2"><a href="{{route('plans.create')}}" class="btn btn-dark">Adicionar - Plano</a></div>
 </div>
-
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Planos</a></li>
@@ -58,9 +56,6 @@
             @endforeach
         </tbody>
     </table>
-
-</div>
-<div class="card-footer">
 
 </div>
 @stop

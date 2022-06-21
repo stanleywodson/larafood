@@ -23,6 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        //tenantUser refere-se ao escopo nao ao relacionamento ambos estão no model user
         $users = $this->repository->tenantUser()->get();
         //$users = $this->repository->where('tenant_id', auth()->user()->tenant_id)->get(); //forma que traz o mesmo resultado de exemplo de cima
 

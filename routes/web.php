@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
                               PermissionController,
                               PlanProfileController, 
 };
-use App\Http\Controllers\Admin\{PlanController, PlanDetailController, UserController};                              
+use App\Http\Controllers\Admin\{CategoryController, PlanController, PlanDetailController, UserController};                              
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 /**
@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->middleware('auth')->group(function(){
+/**
+ *  * Route Category
+ */ 
+    
+Route::any('/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+Route::resource('/categories', CategoryController::class);                                                               
 /**
  * Route Users
  */ 

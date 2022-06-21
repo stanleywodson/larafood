@@ -57,7 +57,6 @@ class User extends Authenticatable
     public function search($filter)
     {
         $results = $this->where('name', 'LIKE', "%{$filter}%")
-        ->orWhere('name', 'LIKE', "%{$filter}%")
         ->orWhere('email', 'LIKE', "%{$filter}%")
         ->tenantUser()
         ->get();
@@ -65,7 +64,7 @@ class User extends Authenticatable
     return $results;
     }
     /**
-     * um tenant tem um usuário
+     * um tenant pertence a um usuário
      */
     public function tenant()
     {
