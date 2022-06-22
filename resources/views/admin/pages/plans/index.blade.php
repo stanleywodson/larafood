@@ -9,7 +9,7 @@
         <h1>Planos <a href="{{route('plans.create')}}" class="btn btn-dark"><i class="fa fa-plus-square"></i></a></h1>
     </div>
 </div>
-<ol class="breadcrumb">
+<ol class="breadcrumb" style="margin-top: 20px">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Planos</a></li>
 </ol>

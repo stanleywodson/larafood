@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<ol class="breadcrumb">
+<ol class="breadcrumb" style="margin-top: 20px">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Categorias</a></li>
 </ol>
