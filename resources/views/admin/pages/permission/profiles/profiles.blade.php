@@ -11,10 +11,11 @@
     </div>
 </div>
 
-<!-- <ol class="breadcrumb">
+ <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Planos</a></li>
-</ol> -->
+    <li class="breadcrumb-item"><a href="{{ route('permission.index') }}">Permissões</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('permissions.profiles', $permissions->id) }}">Perfis - Vinculados</a></li>
+</ol> 
 
 @stop
 
@@ -47,6 +48,6 @@
 
 @section('js')
 <script>
-    console.log('Hi!');
+    
 </script>
 @stop

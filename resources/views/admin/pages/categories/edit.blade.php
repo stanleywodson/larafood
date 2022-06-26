@@ -1,21 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Plano')
+@section('title', 'Editar Categorias')
 
 @section('content_header')
-<h1>Editar Plano:  <b>{{$plan->name}}</b></h1>
+<h1>Editar Categoria:  <b>{{$category->name}}</b></h1>
 @stop
 
 @section('content')
 <div class="card">
     <div class="card-header">
-        <form method="post" action="{{route('plans.update', $plan->url)}}">
+        <form method="post" action="{{route('categories.update', $category->id)}}">
             @csrf
             @method('PUT')
 
             @include('admin.includes.alerts')
 
-            @include('admin.pages.plans._partials.form_plan')
+            @include('admin.pages.categories._partials.form_categories')
             
         </form>
     </div>

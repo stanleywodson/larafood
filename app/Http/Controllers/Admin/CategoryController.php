@@ -22,7 +22,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository->tenantCategory()->get();
+        if(!$categories = $this->repository->tenantCategory()->get())
+            return redirect()->route('plans.index');
         
 
         return view('admin.pages.categories.index', compact('categories'));
@@ -53,14 +54,14 @@ class CategoryController extends Controller
      */
     public function store(StoreUpdateCategory $request)
     {
-        $data = $request->all();
-        $data['tenant_id'] = auth()->user()->tenant_id; //consigo trazer o id do tenant - porque o usuário logado tem relaciomento com o tenant
+        //$data = $request->all();
+        //$data['tenant_id'] = auth()->user()->tenant_id; //consigo trazer o id do tenant - porque o usuário logado tem relaciomento com o tenant
 
-        $category = $this->repository->create($data);
+        $category = $this->repository->create($request->all());
         if(!$category){
                 return redirect()->route('categories.index')->with('error', 'Algo deu errado, tente novamente!');
         }else{
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Cadastrado com sucesso!');
         }
 
     }
@@ -73,7 +74,8 @@ class CategoryController extends Controller
      */
     public function show(int $id)
     {
-        if(!$category = $this->repository->tenantCategory()->where('id', $id)->first()) //usa se o first para trazer um unico resultado ao colocar get() tenta trazer uma cellection
+        if(!$category = $this->repository->tenantCategory()->where('id', $id)->first()) 
+        //usa se o first para trazer um unico resultado ao colocar get() tenta trazer uma cellection
         return redirect()->back();
 
         return view('admin.pages.categories.show', compact('category'));
@@ -87,6 +89,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        if(!$category = $this->repository->tenantCategory()->where('id', $id)->first())
+            return redirect()->back();
+
         return view('admin.pages.categories.edit', compact('category'));
     }
 
@@ -99,7 +104,9 @@ class CategoryController extends Controller
      */
     public function update(StoreUpdateCategory $request, $id)
     {
-        //
+        if(!$category = $this->repository->tenantCategory()->where('id', $id)->first())
+            return redirect()->back();
+
     }
 
     /**
