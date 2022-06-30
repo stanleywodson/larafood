@@ -24,7 +24,7 @@ class CategoryController extends Controller
     {
         if(!$categories = $this->repository->get())
             return redirect()->route('plans.index');
-        
+
 
         return view('admin.pages.categories.index', compact('categories'));
     }
@@ -74,7 +74,7 @@ class CategoryController extends Controller
      */
     public function show(int $id)
     {
-        if(!$category = $this->repository->where('id', $id)->first()) 
+        if(!$category = $this->repository->find($id))
         //usa se o first para trazer um unico resultado ao colocar get() tenta trazer uma cellection
         return redirect()->back();
 
@@ -89,7 +89,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        if(!$category = $this->repository->where('id', $id)->first())
+        if(!$category = $this->repository->find($id))
             return redirect()->back();
 
         return view('admin.pages.categories.edit', compact('category'));
@@ -104,8 +104,11 @@ class CategoryController extends Controller
      */
     public function update(StoreUpdateCategory $request, $id)
     {
-        if(!$category = $this->repository->where('id', $id)->first())
+        if(!$category = $this->repository->find($id))
             return redirect()->back();
+
+            $category->update($request->all());
+            return redirect()->route('categories.index')->with('update', 'Atualizado com sucesso!');
 
     }
 
@@ -117,7 +120,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if(!$category = $this->repository->where('id', $id)->first())
+        if(!$category = $this->repository->find($id))
         return redirect()->back();
 
         $category->delete();

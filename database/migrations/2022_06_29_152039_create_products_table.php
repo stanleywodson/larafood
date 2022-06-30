@@ -1,9 +1,9 @@
 <?php
 
 use App\Models\Tenant;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -14,13 +14,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Tenant::class)->references('id')
-                                               ->on('tenants')
-                                               ->onDelete('cascade');
-            $table->string('name')->unique();
-            $table->string('url')->unique();
+                ->on('tenants')
+                ->onDelete('cascade');
+            $table->string('title')->unique();
+            $table->string('flag')->unique();
+            $table->string('image');
+            $table->double('price', 10, 2);
             $table->text('description');
             $table->timestamps();
         });
@@ -33,9 +35,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->dropForeignIdFor(Tenant::class);
         });
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('products');
     }
 };

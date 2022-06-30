@@ -1,10 +1,10 @@
 <?php
-use App\Http\Controllers\Admin\ACL\{PermissionProfileController, 
-                              ProfileController, 
+use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
+                              ProfileController,
                               PermissionController,
-                              PlanProfileController, 
+                              PlanProfileController,
 };
-use App\Http\Controllers\Admin\{CategoryController, PlanController, PlanDetailController, UserController};                              
+use App\Http\Controllers\Admin\{CategoryController, PlanController, PlanDetailController, UserController};
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 /**
@@ -15,18 +15,24 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->middleware('auth')->group(function(){
-/**
+    /**
+     * Products
+     */
+
+    Route::any('/products/search', [\App\Http\Controllers\Admin\ProductController::class, 'search'])->name('products.search');
+    Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
+    /**
  *  * Route Category
- */ 
-    
+ */
+
    Route::any('/categories/search', [CategoryController::class, 'search'])->name('categories.search');
-   Route::resource('/categories', CategoryController::class);                                                               
+   Route::resource('/categories', CategoryController::class);
 /**
  * Route Users
- */ 
-    
+ */
+
     Route::any('/users/search', [UserController::class, 'search'])->name('users.search');
-    Route::resource('/users', UserController::class);                                                               
+    Route::resource('/users', UserController::class);
 /**
  * Plan x Profile
  */
@@ -52,19 +58,19 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::resource('/permission', PermissionController::class);
 /**
  * Route Profile
- */ 
+ */
     Route::any('/profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
     Route::resource('/profiles', ProfileController::class);
 /**
  * Route Details Plan
- */   
+ */
     Route::delete('/plans/{url}/detail/{idDetail}/destroy', [PlanDetailController::class, 'destroy'])->name('details.plans.destroy');
     Route::get('/plans/{url}/detail/create', [PlanDetailController::class, 'create'])->name('details.plans.create');
     Route::get('/plans/{url}/detail/{idDetail}', [PlanDetailController::class, 'show'])->name('details.plans.show');
     Route::put('/plans/{url}/detail/{idDetail}', [PlanDetailController::class, 'update'])->name('details.plans.update');
     Route::get('/plans/{url}/detail/{idDetail}/edit', [PlanDetailController::class, 'edit'])->name('details.plans.edit');
     Route::post('/plans/{url}/detail', [PlanDetailController::class, 'store'])->name('details.plans.store');
-    
+
     Route::get('/plans/{url}/detail', [PlanDetailController::class, 'index'])->name('details.plans.index');
 
 /**

@@ -12,14 +12,14 @@ class Category extends Model
 {
     use HasFactory;
     use TenantTrait;
-    
+
     protected $fillable = ['tenant_id','name', 'url', 'description'];
 
 
     // public function scopeTenantCategory(Builder $query)
     // {
     //     return $query->where('tenant_id', auth()->user()->tenant_id);
-    // } 
+    // }
     //---> nao há mais necessidade, estou usando um scope global onde traz esse mesmo resultado
 
     public function search($filter)
@@ -27,5 +27,13 @@ class Category extends Model
         $results = $this->where('name', 'LIKE', "%{$filter}%")->get();
 
     return $results;
+    }
+
+    /**
+     * belongsToMany Categorias tem muitos Produtos
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
 }

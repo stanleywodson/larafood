@@ -246,25 +246,31 @@ return [
             'text' => 'Perfis',
             'url'  => 'admin/profiles',
             'icon' => 'far fa-fw fa-address-book',
-            
+
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permission',
             'icon' => 'fas fa-fw fa-lock',
-            
+
         ],
         [
             'text' => 'Usuários',
             'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
-            
+
         ],
         [
             'text' => 'Categorias',
             'url'  => 'admin/categories',
             'icon' => 'fa fa-list',
-            
+
+        ],
+        [
+            'text' => 'Produtos',
+            'url'  => 'admin/products',
+            'icon' => 'fa fa-products',
+
         ],
         // [
         //     'text'        => 'pages',
