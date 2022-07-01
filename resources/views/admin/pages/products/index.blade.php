@@ -46,7 +46,7 @@
         <tbody>
             @foreach($products as $product)
             <tr>
-                <td><img src="{{url("storage/".$product->image)}}" alt="" style="max-width: 150px"></td>
+                <td><img src="{{asset("storage/{$product->image}")}}" style="max-width: 70px"></td>
                 <td>{{ucwords($product->title)}}</td>
                 <td>R$ - {{number_format($product->price, 2, ',','.')}}</td>
                 <td>{{$product->description}}</td>

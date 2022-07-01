@@ -12,7 +12,7 @@
     <div class="card-header">
         <ul>
             <li>
-                {{$product->image}}
+            <img src="{{asset("storage/{$product->image}")}}" style="max-width: 70px">
             </li>
             <li><b>Nome:</b>      {{$product->title}}</li>
             <li>R$ - {{number_format($product->price, 2, ',','.')}}</li>

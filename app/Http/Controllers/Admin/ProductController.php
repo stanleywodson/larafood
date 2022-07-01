@@ -71,7 +71,7 @@ class ProductController extends Controller
         if(!$product){
             return redirect()->route('products.index')->with('error', 'Algo deu errado, tente novamente!');
         }else{
-            return redirect()->back()->with('success', 'Cadastrado com sucesso!');
+            return redirect()->route('products.index')->with('success', 'Cadastrado com sucesso!');
         }
 
     }
