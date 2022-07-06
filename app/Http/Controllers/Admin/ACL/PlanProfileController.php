@@ -27,7 +27,7 @@ class PlanProfileController extends Controller
 
         return view('admin.pages.plans.profiles.profiles', compact('profiles', 'plan'));
     }
-    //mostrar perfis vinculados a permissoes
+
     public function plans($idProfile)
     {
         if (!$profiles = $this->profile->with('plans')->find($idProfile))
@@ -56,7 +56,7 @@ class PlanProfileController extends Controller
     //vincular uma perfil ao plano
     public function attachPermissionProfile(Request $request, $idPlan)
     {
-       
+
         if (!$plan = $this->plan->find($idPlan))
             return redirect()->back();
 

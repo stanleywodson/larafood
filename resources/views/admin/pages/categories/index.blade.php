@@ -48,7 +48,8 @@
                 <td>{{$category->description}}</td>
                 <td>
                     <a href="{{route('categories.show', $category->id)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                    <a href="{{route('categories.edit', $category->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></i></a>
+                    <a href="{{route('categories.edit', $category->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="{{route('categories.products', $category->id)}}" class="btn btn-secondary">ver produto vinculado</a>
                 </td>
             </tr>
             @endforeach

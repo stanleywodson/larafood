@@ -27,4 +27,15 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function categoriesAvailable()
+    {
+        $categories = Category::whereNotIn('categories.id', function($query) {
+            $query->select('category_product.category_id');
+            $query->from('category_product');
+            $query->whereRaw("category_product.product_id={$this->id}");
+        })->get();
+
+        return $categories;
+    }
 }

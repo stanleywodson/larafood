@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateProduct;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -47,7 +48,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.products.create');
+        //retorna todas as categorias onde os produtos seram inseridos
+        $categories = Category::all();
+
+        return view('admin.pages.products.create', compact('categories'));
     }
 
     /**
@@ -58,6 +62,8 @@ class ProductController extends Controller
      */
     public function store(StoreUpdateProduct $request)
     {
+        //dd($request->categories);
+
         $data = $request->all();
         $tenant = auth()->user()->tenant;
 
@@ -65,7 +71,16 @@ class ProductController extends Controller
             $data['image'] = $request->image->store("tenants/{$tenant->uuid}/produts");
         }
 
+        if (!$request->categories || count($request->categories) == 0) {
+            dd('entrou aqui');
+            //return redirect()->back()->with('error', 'Checkbox vazio');
+        }
         $product = $this->repository->create($data);
+        $category = $product->categories()->attach($data['categories']);
+
+
+
+
 
 
         if(!$product){
@@ -99,8 +114,9 @@ class ProductController extends Controller
     {
         if(!$product = $this->repository->find($id))
             return redirect()->back();
+        $categories = $product->categoriesAvailable();
 
-        return view('admin.pages.products.edit', compact('product'));
+        return view('admin.pages.products.edit', compact('product','categories'));
     }
 
     /**
@@ -128,7 +144,13 @@ class ProductController extends Controller
             $data['image'] = $request->image->store("tenants/{$tenant->uuid}/produts");
         }
 
+
+        if (!$request->categories || count($request->categories) == 0) {
+            return redirect()->back()->with('error', 'Checkbox vazio');
+        }
+
         $product->update($data);
+        $category = $product->categories()->attach($data['categories']);
 
         return redirect()->route('products.index')->with('update', 'Atualizado com sucesso!');
 

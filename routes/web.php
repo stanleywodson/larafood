@@ -4,7 +4,11 @@ use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
                               PermissionController,
                               PlanProfileController,
 };
-use App\Http\Controllers\Admin\{CategoryController, PlanController, PlanDetailController, UserController};
+use App\Http\Controllers\Admin\{CategoryController,
+    CategoryProductController,
+    PlanController,
+    PlanDetailController,
+    UserController};
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 /**
@@ -33,6 +37,15 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 
     Route::any('/users/search', [UserController::class, 'search'])->name('users.search');
     Route::resource('/users', UserController::class);
+    /**
+     * Categories x Products
+     */
+    Route::get('/categories/{idCategory}/products/{idProduct}/detach', [CategoryProductController::class, 'detachProductCategory'])->name('categories.products.detach');
+    //Route::post('/categories/{id}/', [CategoryProductController::class, 'attachPermissionProfile'])->name('categories.products.attach'); //nao vai ter essa rota
+    //Route::get('/categories/{id}/create', [CategoryProductController::class, 'permissionsAvailable'])->name('categories.products.available'); //nao vai ter essa rota
+    Route::get('/products/{id}/categories', [CategoryProductController::class, 'categories'])->name('products.categories'); // rota ok
+    //Profiles x Plan
+    Route::get('/categories/{id}/products', [CategoryProductController::class, 'products'])->name('categories.products'); // rota ok
 /**
  * Plan x Profile
  */
