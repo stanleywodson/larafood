@@ -95,7 +95,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
         if(!$product = $this->repository->find($id))
             //usa se o first para trazer um unico resultado ao colocar get() tenta trazer uma cellection

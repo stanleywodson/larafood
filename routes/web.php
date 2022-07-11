@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\{CategoryController,
     CategoryProductController,
     PlanController,
     PlanDetailController,
+    TableController,
     UserController};
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     /**
-     * Products
+     * Route Tables
+     */
+    Route::any('/tables/search', [TableController::class, 'search'])->name('tables.search');
+    Route::resource('/tables', TableController::class);
+    /**
+     *Route Products
      */
 
     Route::any('/products/search', [\App\Http\Controllers\Admin\ProductController::class, 'search'])->name('products.search');
@@ -49,12 +55,16 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 /**
  * Plan x Profile
  */
-    Route::get('/plans/{id}/profile/{idProfile}/detach', [PlanProfileController::class, 'detachPermissionProfile'])->name('plans.profiles.detach');
-    Route::post('/plans/{id}/', [PlanProfileController::class, 'attachPermissionProfile'])->name('plans.profiles.attach');
-    Route::get('/plans/{id}/create', [PlanProfileController::class, 'permissionsAvailable'])->name('plans.profiles.available');
-    Route::get('/plans/{id}/profiles', [PlanProfileController::class, 'profiles'])->name('plans.profiles');
-    //Profiles x Plan
-    Route::get('/profiles/{id}/plans', [PlanProfileController::class, 'plans'])->name('profiles.plans');
+    Route::controller(PlanProfileController::class)->group(function (){
+
+        Route::get('/plans/{id}/profile/{idProfile}/detach','detachPermissionProfile')->name('plans.profiles.detach');
+        Route::post('/plans/{id}/', 'attachPermissionProfile')->name('plans.profiles.attach');
+        Route::get('/plans/{id}/create',  'permissionsAvailable')->name('plans.profiles.available');
+        Route::get('/plans/{id}/profiles',  'profiles')->name('plans.profiles');
+        //Profiles x Plan
+        Route::get('/profiles/{id}/plans', 'plans')->name('profiles.plans');
+    });
+
 /**
  * Profile x Permission
  */

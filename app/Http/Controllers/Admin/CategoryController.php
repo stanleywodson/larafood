@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         if(!$categories = $this->repository->get())
-            return redirect()->route('plans.index');
+            return redirect()->route('categories.index');
 
 
         return view('admin.pages.categories.index', compact('categories'));
