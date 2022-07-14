@@ -23,7 +23,11 @@ class TableController extends Controller
     {
         if(!$tables = $this->repository->get())
             return redirect()->route('plans.index');
-
+        /*
+         * testando resultados transformados em json
+        $teste = json_encode($tables);
+        dd($teste);
+        */
 
         return view('admin.pages.tables.index', compact('tables'));
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
+use App\Models\Traits\UserACLTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, UserACLTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +64,7 @@ class User extends Authenticatable
 
     return $results;
     }
+
     /**
      * um tenant pertence a um usuário
      */

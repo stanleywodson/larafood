@@ -4,7 +4,7 @@
  */
 return [
 
-    'Admins' => [
+    'admins' => [
         'stanley.wodson@gmail.com',
     ],
 ];
