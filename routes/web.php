@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware('auth')->group(function(){
 
     Route::get('test-acl', function (){
-        dd(auth()->user()->isAdmin());
+        dd(auth()->user()->isTenant());
     });
     /**
      * Route Tables

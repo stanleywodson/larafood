@@ -24,14 +24,14 @@ trait UserACLTrait
     {
         return in_array($permissionName, $this->permissions());
     }
-
+    //verifica se e admin
     public function isAdmin():bool
     {
-        //essa trait e uma continuação de model user ou onde ela for usada por isso,
+        //essa trait e uma continuação de model user ou onde ela for usada, por isso
         // vai comparar o email com o array que foi criado em config -> tenant
         return in_array($this->email, config('tenant.admins')); //reaproveitando
     }
-
+    //confirma que nao e admin
     public function isTenant():bool
     {
         return !in_array($this->email, config('tenant.admins'));
