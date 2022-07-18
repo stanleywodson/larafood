@@ -246,36 +246,42 @@ return [
             'text' => 'Perfis',
             'url'  => 'admin/profiles',
             'icon' => 'far fa-fw fa-address-book',
+            'can' => 'profiles'
 
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permission',
             'icon' => 'fas fa-fw fa-lock',
+            'can' => 'permissions'
 
         ],
         [
             'text' => 'Usuários',
             'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'users'
 
         ],
         [
             'text' => 'Categorias',
             'url'  => 'admin/categories',
             'icon' => 'fa fa-list',
+            'can' => 'categories'
 
         ],
         [
             'text' => 'Produtos',
             'url'  => 'admin/products',
             'icon' => 'fa fa-products',
+            'can' => 'products'
 
         ],
         [
             'text' => 'Mesas',
             'url'  => 'admin/tables',
             'icon' => 'fa fa-tables',
+            'can' => 'tables'
 
         ],
         // [

@@ -16,6 +16,7 @@ class CategoryProductController extends Controller
     {
         $this->category = $category;
         $this->product = $product;
+        $this->middleware('can:categories');
     }
     //metodo retorna todas as Categorias de determinado Produto
     public function categories($productId)

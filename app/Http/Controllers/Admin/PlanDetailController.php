@@ -14,6 +14,7 @@ class PlanDetailController extends Controller
     {
         $this->repository = $detailPlan;
         $this->plan = $plan;
+        $this->middleware('can:plans');
     }
 
     public function index($urlPlan)
@@ -22,7 +23,7 @@ class PlanDetailController extends Controller
             return redirect()->back();
         }
         $details = $plan->details;
-     
+
         return view('admin.pages.plans.details.index',[
             'plan' => $plan,
             'details' => $details
