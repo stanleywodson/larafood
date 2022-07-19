@@ -6,7 +6,7 @@
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 <div class="row">
     <div class="col-md-10">
-        <h1>Planos <a href="{{route('plans.create')}}" class="btn btn-dark"><i class="fa fa-plus-square"></i></a></h1>
+        <h1>Planos <a href="{{route('plans.create')}}" class="btn btn-dark" id="test"><i class="fa fa-plus-square"></i></a></h1>
     </div>
 </div>
 <ol class="breadcrumb" style="margin-top: 20px">
@@ -22,7 +22,7 @@
         <!-- formulário de pesquisa -->
         <form method="POST" action="{{ route('plans.search') }}" class="form form-inline">
             @csrf
-            <div class="row">     
+            <div class="row">
                     <input type="text" name="filter" class="form-control" placeholder="Nome do Plano">
                     <button type="submit" class="btn btn-dark"><i class="fa fa-search" aria-hidden="true"></i></button>
             </div>
@@ -63,9 +63,15 @@
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
-
 @section('js')
+
 <script>
-    console.log('Hi!');
+  // $(function(){
+  //     $( "#test" ).click(function( event ) {
+  //         event.preventDefault();
+  //         console.log('funcionou')
+  //     })
+  // })
+
 </script>
 @stop
