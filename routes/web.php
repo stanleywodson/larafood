@@ -4,11 +4,13 @@ use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
                               PermissionController,
                               PlanProfileController,
 };
-use App\Http\Controllers\Admin\{CategoryController,
+use App\Http\Controllers\Admin\
+    {CategoryController,
     CategoryProductController,
     PlanController,
     PlanDetailController,
     TableController,
+    TenantController,
     UserController};
 
 use App\Http\Controllers\Site\SiteController;
@@ -26,6 +28,12 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('test-acl', function (){
         dd(auth()->user()->permissions());
     });
+    /**
+     * Route Tenant(Empresa)
+     */
+    Route::get('/tenants/{id}',[TenantController::class, 'update'])->name('tenant.update');
+    Route::get('/tenants/{id}/edit',[TenantController::class, 'edit'])->name('tenant.edit');
+    Route::get('/tenants',[TenantController::class, 'index'])->name('tenant.index');
     /**
      * Route Tables
      */

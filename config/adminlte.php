@@ -273,15 +273,22 @@ return [
         [
             'text' => 'Produtos',
             'url'  => 'admin/products',
-            'icon' => 'fa fa-products',
+            'icon' => 'fa fa-product-hunt',
             'can' => 'products'
 
         ],
         [
             'text' => 'Mesas',
             'url'  => 'admin/tables',
-            'icon' => 'fa fa-tables',
+            'icon' => 'fa fa-table',
             'can' => 'tables'
+
+        ],
+        [
+            'text' => 'Empresas',
+            'url'  => 'admin/tenants',
+            'icon' => 'fa fa-building',
+            'can' => 'tenants'
 
         ],
         // [
