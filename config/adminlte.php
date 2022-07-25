@@ -250,6 +250,13 @@ return [
 
         ],
         [
+            'text' => 'Cargos',
+            'url'  => 'admin/cargos',
+            'icon' => 'far fa-fw fa-work',
+            'can' => 'cargos'
+
+        ],
+        [
             'text' => 'Permissões',
             'url'  => 'admin/permission',
             'icon' => 'fas fa-fw fa-lock',

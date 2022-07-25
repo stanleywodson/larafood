@@ -3,6 +3,7 @@ use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
                               ProfileController,
                               PermissionController,
                               PlanProfileController,
+                              PermissionCargoController
 };
 use App\Http\Controllers\Admin\
     {CategoryController,
@@ -98,6 +99,21 @@ Route::prefix('admin')->middleware('auth')->group(function(){
  */
     Route::any('/profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
     Route::resource('/profiles', ProfileController::class);
+
+    /**
+     * Route Cargos
+     */
+    Route::any('/cargos/search', [\App\Http\Controllers\Admin\ACL\CargoController::class, 'search'])->name('cargos.search');
+    Route::resource('/cargos', \App\Http\Controllers\Admin\ACL\CargoController::class);
+    /**
+     * Route Permission x Cargos
+     */
+    Route::get('/cargos/{id}/permission/{idPermission}/detach', [PermissionCargoController::class, 'detachPermissionProfile'])->name('cargos.permissions.detach');
+    Route::post('/cargos/{id}/', [PermissionCargoController::class, 'attachPermissionProfile'])->name('cargos.permissions.attach');
+    Route::get('/cargos/{id}/create', [PermissionCargoController::class, 'permissionsAvailable'])->name('cargos.permissions.available');
+    Route::get('/cargos/{id}/permissions', [PermissionCargoController::class, 'permissions'])->name('cargos.permissions');
+    //Permission x Cargo
+    Route::get('/permissions/{id}/cargos', [PermissionCargoController::class, 'cargos'])->name('permissions.cargos');
 /**
  * Route Details Plan
  */
