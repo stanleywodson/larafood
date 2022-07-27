@@ -22,11 +22,8 @@ class Cargo extends Model
     /**
      * Relationship ManyToMany,um perfil pertence a muitas permissões N:N
      */
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class);
-    }
 
+    //vai trazer as permissiões que nao estão vinculadas ao cargo
     public function permissionsAvailable()
     {
         $permissions = Permission::whereNotIn('permissions.id', function($query) {
@@ -36,5 +33,15 @@ class Cargo extends Model
         })->get();
 
         return $permissions;
+    }
+    // um cargo tem muitas permissões
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+    // um cargo tem muitos usuários
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

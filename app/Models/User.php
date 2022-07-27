@@ -64,6 +64,17 @@ class User extends Authenticatable
 
     return $results;
     }
+    public function cargosAttach()
+    {
+        $cargos = Cargo::whereNotIn('cargos.id', function ($query){
+            $query->select('cargo_user.cargo_id');
+            $query->from('cargo_user');
+            $query->whereRaw("cargo_user.user_id={$this->id}");
+        })->get();
+
+        return $cargos;
+    }
+
 
     /**
      * um tenant pertence a um usuário
@@ -71,5 +82,9 @@ class User extends Authenticatable
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+    public function cargos()
+    {
+        return $this->belongsToMany(Cargo::class);
     }
 }

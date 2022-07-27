@@ -1,9 +1,11 @@
 <?php
-use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
+use App\Http\Controllers\Admin\ACL\{
+                              PermissionProfileController,
                               ProfileController,
                               PermissionController,
                               PlanProfileController,
-                              PermissionCargoController
+                              PermissionCargoController,
+                              CargoUserController
 };
 use App\Http\Controllers\Admin\
     {CategoryController,
@@ -106,7 +108,16 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::any('/cargos/search', [\App\Http\Controllers\Admin\ACL\CargoController::class, 'search'])->name('cargos.search');
     Route::resource('/cargos', \App\Http\Controllers\Admin\ACL\CargoController::class);
     /**
-     * Route Permission x Cargos
+     * Route Users x users
+     */
+    Route::get('/users/{id}/permission/{idPermission}/detach', [CargoUserController::class, 'detachPermissionProfile'])->name('users.cargos.detach');
+    Route::post('/users/{id}/', [CargoUserController::class, 'attachPermissionProfile'])->name('users.cargos.attach');
+    Route::get('/users/{id}/create', [CargoUserController::class, 'cargosAttach'])->name('users.cargos.available');
+    Route::get('/users/{id}/cargos', [CargoUserController::class, 'cargos'])->name('users.cargos');
+    //users x Users
+    Route::get('/cargos/{id}/users', [CargoUserController::class, 'users'])->name('cargos.users');
+    /**
+     * Route Cargos x Permissions
      */
     Route::get('/cargos/{id}/permission/{idPermission}/detach', [PermissionCargoController::class, 'detachPermissionProfile'])->name('cargos.permissions.detach');
     Route::post('/cargos/{id}/', [PermissionCargoController::class, 'attachPermissionProfile'])->name('cargos.permissions.attach');

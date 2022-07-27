@@ -13,9 +13,9 @@
 
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('cargos.index') }}">Cargos</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('cargos.permissions',[$cargo->id]) }}">Permissões Vinculadas</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('cargos.permissions.available',[$cargo->id]) }}">Vincular Permissão</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Cargos</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('users.cargos',[$user->id]) }}">Cargos Vinculados</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('users.cargos.available',[$user->id]) }}">Vincular Cargos</a></li>
 </ol>
 
 @stop
