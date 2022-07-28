@@ -108,10 +108,10 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::any('/cargos/search', [\App\Http\Controllers\Admin\ACL\CargoController::class, 'search'])->name('cargos.search');
     Route::resource('/cargos', \App\Http\Controllers\Admin\ACL\CargoController::class);
     /**
-     * Route Users x users
+     * Route Users x Cargos
      */
-    Route::get('/users/{id}/permission/{idPermission}/detach', [CargoUserController::class, 'detachPermissionProfile'])->name('users.cargos.detach');
-    Route::post('/users/{id}/', [CargoUserController::class, 'attachPermissionProfile'])->name('users.cargos.attach');
+    Route::get('/users/{userId}/cargos/{cargoId}/detach', [CargoUserController::class, 'dettachUserCargo'])->name('users.cargos.detach');
+    Route::post('/users/{id}/', [CargoUserController::class, 'attachUserCargo'])->name('users.cargos.attach');
     Route::get('/users/{id}/create', [CargoUserController::class, 'cargosAttach'])->name('users.cargos.available');
     Route::get('/users/{id}/cargos', [CargoUserController::class, 'cargos'])->name('users.cargos');
     //users x Users

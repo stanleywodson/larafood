@@ -52,6 +52,8 @@
 
 @section('js')
 <script>
-    console.log('Hi!');
+    $(function(){
+
+    })
 </script>
 @stop

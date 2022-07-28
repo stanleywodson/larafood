@@ -35,7 +35,35 @@ class CargoUserController extends Controller
     public function cargosAttach($userId)
     {
         $user = $this->user->find($userId);
-        $teste = $user->cargosAttach();
-        dd($teste);
+        $cargos = $user->cargosAttach();
+
+        return view('admin.pages.users.cargos.available', compact('user', 'cargos'));
     }
+
+    public function attachUserCargo(Request $request, $userId)
+    {
+        //dd($request->cargos);
+        if(!$user = $this->user->with('cargos')->find($userId))
+            return redirect()->back();
+
+        if (!$request->cargos || count($request->cargos) == 0)
+            return redirect()->back()->with('error', 'nenhum checkbox marcardo');
+
+        $user->cargos()->attach($request->cargos);
+        return redirect()->route('users.cargos', $user->id);
+
+    }
+
+    public function dettachUserCargo($userId, $cargoId)
+    {
+        $user = $this->user->with('cargos')->find($userId);
+
+        if (!$userId || !$cargoId)
+           return redirect()->back();
+
+        $user->cargos()->detach($cargoId);
+            return redirect()->back();
+
+    }
+
 }

@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Permissões')
+@section('title', 'cargos/usuários')
 
 @section('content_header')
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 <div class="row">
     <div class="col-md-10">
-        <h1>Vincular Permissão - <b>{{$cargo->name}}</b></h1>
+        <h1>Vincular Cargo  ao- <b>{{$user->name}}</b></h1>
         @include('admin.includes.alerts')
     </div>
 </div>
@@ -32,15 +32,15 @@
             </tr>
         </thead>
         <tbody>
-            <form action="{{ route('cargos.permissions.attach', $cargo->id) }}" method="post">
+            <form action="{{ route('users.cargos.attach', $user->id) }}" method="post">
                 @csrf
-            @foreach($permissions as $permission)
+            @foreach($cargos as $cargo)
             <tr>
                 <td>
-                    <input type="checkbox" name="permissions[]" value="{{$permission->id}}">
+                    <input type="checkbox" name="cargos[]" value="{{$cargo->id}}">
                 </td>
                 <td>
-                    {{$permission->name}}
+                    {{$cargo->name}}
                 </td>
             </tr>
             @endforeach
