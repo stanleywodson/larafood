@@ -32,14 +32,8 @@
                 <th>Ações</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach($user->cargos as $cargo)
-            <tr>
-                <td>{{$cargo->name}}</td>
-                <td>{{$cargo->description}}</td>
-                <td><a href="{{ route('users.cargos.detach',[$user->id, $cargo->id]) }}" class="btn btn-danger">DESVINCULAR</a></td>
-            </tr>
-            @endforeach
+        <tbody id="tbody">
+
         </tbody>
     </table>
 
@@ -53,6 +47,76 @@
 @section('js')
 <script>
     $(function(){
+        let url = window.location.origin
+        function table_data_row(data) {
+            var	rows = '';
+            var i = 0;
+            $.each( data, function( key, value ) {
+
+                rows = rows + '<tr>';
+                rows = rows + '<td>'+value.name+'</td>';
+                rows = rows + '<td>'+value.description+'</td>';
+                rows = rows + '<td data-id="'+value.id+'">';
+                rows = rows + '<a class="btn btn-sm btn-danger text-light"  id="deleteRow" data-id="'+value.id+'" >Desvincular</a> ';
+                rows = rows + '</td>';
+                rows = rows + '</tr>';
+            });
+            $("#tbody").html(rows);
+        }
+
+        function getAllCargos()
+        {
+            axios.post("{{ route('cargo-test',$user->id) }}")
+                .then(function(res){
+                    table_data_row(res.data)
+                     //console.log(res.data);
+                })
+        }
+        getAllCargos()
+        // desvincular cargos do usuário
+        $('body').on('click','#deleteRow',function (e) {
+            e.preventDefault();
+            let id = $(this).data('id')
+            let userId = {{$user->id}}
+            // let del = url + '/category/' + id
+            // console.log(del)
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success mx-2',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Você tem certeza?',
+                text: "Cargo será desvinculado!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, desvincular!',
+                cancelButtonText: 'Não, cancelar!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.get(`${url}/admin/users/${userId}/cargos/${id}/detach`).then(function(r){
+                        getAllCargos();
+                        swalWithBootstrapButtons.fire(
+                            'Desvinculado!',
+                            ':)',
+                            'success'
+                        )
+                    });
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelado',
+                        'cargo continua vinculado :)',
+                        'error'
+                    )
+                }
+            })
+        });
 
     })
 </script>

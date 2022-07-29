@@ -116,6 +116,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/users/{id}/cargos', [CargoUserController::class, 'cargos'])->name('users.cargos');
     //users x Users
     Route::get('/cargos/{id}/users', [CargoUserController::class, 'users'])->name('cargos.users');
+    Route::post('cargo-test/{id}', [CargoUserController::class, 'getAllCargosOfUser'])->name('cargo-test');
     /**
      * Route Cargos x Permissions
      */

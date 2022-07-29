@@ -9,7 +9,7 @@ class TenantController extends Controller
 {
     public function index()
     {
-        echo 'estou no index';
+        echo '<h1>Página em construção</h1>';
     }
 
     public function edit($id)

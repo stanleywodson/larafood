@@ -25,6 +25,13 @@ class CargoUserController extends Controller
 
         return view('admin.pages.users.cargos.cargos', compact('user'));
     }
+    // alimento a tabela com requisisao via axios
+    public function getAllCargosOfUser($id)
+    {
+        $user = $this->user->find($id);
+
+          return $user->cargos;
+    }
 
 //    public function user($cargoId)
 //    {
@@ -62,7 +69,8 @@ class CargoUserController extends Controller
            return redirect()->back();
 
         $user->cargos()->detach($cargoId);
-            return redirect()->back();
+            //return redirect()->back();
+        return 'ok';
 
     }
 

@@ -49,9 +49,9 @@
                 <td>{{$user->email}}</td>
                 <td style="width: 350px;">
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
-                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                    <a href="{{ route('users.cargos', $user->id) }}" class="btn btn-secondary">vincular cargo</a>
+                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="{{ route('users.cargos', $user->id) }}" class="btn btn-sm btn-secondary">vincular cargo</a>
 
                 </td>
             </tr>

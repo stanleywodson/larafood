@@ -83,6 +83,7 @@
 
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ url('https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js') }}"></script>
+        <script src="{{ url('//cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
