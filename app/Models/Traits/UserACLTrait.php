@@ -2,12 +2,34 @@
 namespace App\Models\Traits;
 
 
+use App\Models\Cargo;
+use App\Models\Permission;
+use App\Models\Tenant;
+
 trait UserACLTrait
 {
     public function permissions()
     {
-        $tenant = $this->tenant()->first();
-        $plan =  $tenant->plan;
+        $permissionsPlan = $this->permissionPlan();
+        $permissionCargo = $this->permissionCargo();
+
+            $permissions = [];
+
+            foreach ($permissionCargo as $permission){
+                if(in_array($permission, $permissionsPlan)){
+                    array_push($permissions, $permission);
+                }
+
+            }
+
+        return $permissions;
+    }
+    public function permissionPlan()
+    {
+//        $tenant = $this->tenant()->first();
+//        $plan =  $tenant->plan;
+        $tenant = Tenant::with('plan.profiles.permissions')->where('id', $this->tenant_id)->first();
+        $plan = $tenant->plan;
 
         $permissions = [];
         foreach ($plan->profiles as $profile){
@@ -17,7 +39,24 @@ trait UserACLTrait
         }
 
         return $permissions;
+    }
 
+    public function permissionCargo(): array
+    {
+        $cargos = $this->cargos()->with('permissions')->get();
+
+       $permissions = [];
+       //ainda estou testando mas esse foreach funciona usando o first();
+//        foreach ($cargos->permissions as $permission){
+//            array_push($permissions, $permission->name);
+//        }
+        foreach ($cargos as $cargo){
+            foreach ($cargo->permissions as $permission){
+                array_push($permissions, $permission->name);
+            }
+        }
+
+        return $permissions;
     }
     //verifica se tal user tem uma determinada permissão
     public function hasPermission(string $permissionName):bool

@@ -86,7 +86,7 @@
             $( "#filter" ).keyup(function() {
 
                     try {
-                        const response = axios.post("{{route('plans.search',)}}",{
+                        const response = axios.post("{{route('plans.search')}}",{
                             filter: $('#filter').val()
                         }).then(function (response) {
                             // if(response.data.length === 0) {

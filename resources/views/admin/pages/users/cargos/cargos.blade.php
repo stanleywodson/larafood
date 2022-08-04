@@ -78,8 +78,7 @@
             e.preventDefault();
             let id = $(this).data('id')
             let userId = {{$user->id}}
-            // let del = url + '/category/' + id
-            // console.log(del)
+
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success mx-2',
@@ -101,7 +100,7 @@
                         getAllCargos();
                         swalWithBootstrapButtons.fire(
                             'Desvinculado!',
-                            ':)',
+                            ':(',
                             'success'
                         )
                     });
