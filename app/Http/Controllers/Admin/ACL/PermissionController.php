@@ -10,10 +10,11 @@ use App\Http\Requests\StoreUpdateProfiles;
 class PermissionController extends Controller
 {
     protected $repository;
-    
+
     public function __construct(Permission $permission)
     {
         $this->repository = $permission;
+        $this->middleware('can:permissions');
     }
     /**
      * Display a listing of the resource.
@@ -60,7 +61,7 @@ class PermissionController extends Controller
     public function show($id)
     {
         $permission = $this->repository->where('id', $id)->first();
-        
+
         if(!$permission)
             return redirect()->back();
 
@@ -100,7 +101,7 @@ class PermissionController extends Controller
         $permission->update($request->all());
 
         return redirect()->route('permission.index')->with('update','Atualizado com sucesso!');
-        
+
     }
 
     /**

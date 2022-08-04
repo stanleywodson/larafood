@@ -10,10 +10,11 @@ use App\Http\Requests\StoreUpdateProfiles;
 class ProfileController extends Controller
 {
     protected $repository;
-    
+
     public function __construct(Profile $profile)
     {
         $this->repository = $profile;
+        $this->middleware('can:profiles');
     }
     /**
      * Display a listing of the resource.
@@ -65,7 +66,7 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {     
+    {
         if(!$profile = $this->repository->where('id', $id)->first())
             return redirect()->back();
 
@@ -101,7 +102,7 @@ class ProfileController extends Controller
         $profile->update($request->all());
 
         return redirect()->back()->with('update','Atualizado com sucesso!');
-        
+
     }
 
     /**
@@ -111,7 +112,7 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {       
+    {
         if(!$profile = $this->repository->where('id', $id)->first())
             return redirect()->back();
 

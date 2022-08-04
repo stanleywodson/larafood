@@ -6,7 +6,7 @@
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 <div class="row">
     <div class="col-md-10">
-        <h1>Perfis <a href="{{route('users.create')}}" class="btn btn-dark"><i class="fa fa-plus-square"></i></a></h1>
+        <h1>Usuários <a href="{{route('users.create')}}" class="btn btn-dark"><i class="fa fa-plus-square"></i></a></h1>
         @include('admin.includes.alerts')
     </div>
 </div>
@@ -49,9 +49,10 @@
                 <td>{{$user->email}}</td>
                 <td style="width: 350px;">
                     <!-- <a href="" class="btn btn-primary">DETALHES</a> -->
-                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                    
+                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="{{ route('users.cargos', $user->id) }}" class="btn btn-sm btn-secondary">vincular cargo</a>
+
                 </td>
             </tr>
 

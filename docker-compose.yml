@@ -12,39 +12,52 @@ services:
         working_dir: /var/www/
         volumes:
             - ./:/var/www
-        depends_on: 
+        depends_on:
             - redis
-        networks: 
+        networks:
             - laravel-food
-    
+
     # nginx
     nginx:
         container_name: larafood-nginx
         image: nginx:alpine
         restart: unless-stopped
-        ports: 
+        ports:
             - "8989:80"
-        volumes: 
+        volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
-        networks: 
+        networks:
             - laravel-food
-
+    node:
+            build: ./docker/node
+            container_name: larafood-node
+            restart: always
+            ports:
+                - "3000:3000"
+                - "35729:35729"
+            environment:
+                - CHOKIDAR_USEPOLLING=true
+                - TZ=America/Sao_Paulo
+            volumes:
+                - .:/var/www
+            networks:
+                - laravel-food
     # db mysql
     mysql:
         container_name: larafood-mysql
         image: mysql:5.7.22
         restart: unless-stopped
-        environment: 
+        environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
             MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_USER: ${DB_USERNAME}
-        volumes: 
+        volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
-        ports: 
+        ports:
             - "3306:3306"
-        networks: 
+        networks:
             - laravel-food
 
     # queue
@@ -53,21 +66,21 @@ services:
         image: especializati/laravel9-app
         restart: unless-stopped
         command: "php artisan queue:work"
-        volumes: 
+        volumes:
             - ./:/var/www
-        depends_on: 
+        depends_on:
             - redis
             - app
-        networks: 
+        networks:
             - laravel-food
 
     # redis
     redis:
         container_name: larafood-redis
         image: redis:latest
-        networks: 
+        networks:
             - laravel-food
 
-networks: 
+networks:
     laravel-food:
         driver: bridge

@@ -1,12 +1,24 @@
 <?php
-use App\Http\Controllers\Admin\ACL\{PermissionProfileController,
+use App\Http\Controllers\Admin\ACL\{
+                              PermissionProfileController,
                               ProfileController,
                               PermissionController,
                               PlanProfileController,
+                              PermissionCargoController,
+                              CargoUserController
 };
-use App\Http\Controllers\Admin\{CategoryController, PlanController, PlanDetailController, UserController};
+use App\Http\Controllers\Admin\
+    {CategoryController,
+    CategoryProductController,
+    PlanController,
+    PlanDetailController,
+    TableController,
+    TenantController,
+    UserController};
+
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
+//use App\Models\Traits\UserACLTrait;
 /**
  * Route Site
  */
@@ -15,8 +27,23 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->middleware('auth')->group(function(){
+
+    Route::get('test-acl', function (){
+        dd(auth()->user()->permissions());
+    });
     /**
-     * Products
+     * Route Tenant(Empresa)
+     */
+    Route::get('/tenants/{id}',[TenantController::class, 'update'])->name('tenant.update');
+    Route::get('/tenants/{id}/edit',[TenantController::class, 'edit'])->name('tenant.edit');
+    Route::get('/tenants',[TenantController::class, 'index'])->name('tenant.index');
+    /**
+     * Route Tables
+     */
+    Route::any('/tables/search', [TableController::class, 'search'])->name('tables.search');
+    Route::resource('/tables', TableController::class);
+    /**
+     *Route Products
      */
 
     Route::any('/products/search', [\App\Http\Controllers\Admin\ProductController::class, 'search'])->name('products.search');
@@ -33,15 +60,28 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 
     Route::any('/users/search', [UserController::class, 'search'])->name('users.search');
     Route::resource('/users', UserController::class);
+    /**
+     * Categories x Products
+     */
+    Route::get('/categories/{idCategory}/products/{idProduct}/detach', [CategoryProductController::class, 'detachProductCategory'])->name('categories.products.detach');
+    //Route::post('/categories/{id}/', [CategoryProductController::class, 'attachPermissionProfile'])->name('categories.products.attach'); //nao vai ter essa rota
+    //Route::get('/categories/{id}/create', [CategoryProductController::class, 'permissionsAvailable'])->name('categories.products.available'); //nao vai ter essa rota
+    Route::get('/products/{id}/categories', [CategoryProductController::class, 'categories'])->name('products.categories'); // rota ok
+    //Profiles x Plan
+    Route::get('/categories/{id}/products', [CategoryProductController::class, 'products'])->name('categories.products'); // rota ok
 /**
  * Plan x Profile
  */
-    Route::get('/plans/{id}/profile/{idProfile}/detach', [PlanProfileController::class, 'detachPermissionProfile'])->name('plans.profiles.detach');
-    Route::post('/plans/{id}/', [PlanProfileController::class, 'attachPermissionProfile'])->name('plans.profiles.attach');
-    Route::get('/plans/{id}/create', [PlanProfileController::class, 'permissionsAvailable'])->name('plans.profiles.available');
-    Route::get('/plans/{id}/profiles', [PlanProfileController::class, 'profiles'])->name('plans.profiles');
-    //Profiles x Plan
-    Route::get('/profiles/{id}/plans', [PlanProfileController::class, 'plans'])->name('profiles.plans');
+    Route::controller(PlanProfileController::class)->group(function (){
+
+        Route::get('/plans/{id}/profile/{idProfile}/detach','detachPermissionProfile')->name('plans.profiles.detach');
+        Route::post('/plans/{id}/', 'attachPermissionProfile')->name('plans.profiles.attach');
+        Route::get('/plans/{id}/create',  'permissionsAvailable')->name('plans.profiles.available');
+        Route::get('/plans/{id}/profiles',  'profiles')->name('plans.profiles');
+        //Profiles x Plan
+        Route::get('/profiles/{id}/plans', 'plans')->name('profiles.plans');
+    });
+
 /**
  * Profile x Permission
  */
@@ -61,6 +101,31 @@ Route::prefix('admin')->middleware('auth')->group(function(){
  */
     Route::any('/profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
     Route::resource('/profiles', ProfileController::class);
+
+    /**
+     * Route Cargos
+     */
+    Route::any('/cargos/search', [\App\Http\Controllers\Admin\ACL\CargoController::class, 'search'])->name('cargos.search');
+    Route::resource('/cargos', \App\Http\Controllers\Admin\ACL\CargoController::class);
+    /**
+     * Route Users x Cargos
+     */
+    Route::get('/users/{userId}/cargos/{cargoId}/detach', [CargoUserController::class, 'dettachUserCargo'])->name('users.cargos.detach');
+    Route::post('/users/{id}/', [CargoUserController::class, 'attachUserCargo'])->name('users.cargos.attach');
+    Route::get('/users/{id}/create', [CargoUserController::class, 'cargosAttach'])->name('users.cargos.available');
+    Route::get('/users/{id}/cargos', [CargoUserController::class, 'cargos'])->name('users.cargos');
+    //users x Users
+    Route::get('/cargos/{id}/users', [CargoUserController::class, 'users'])->name('cargos.users');
+    Route::post('cargo-test/{id}', [CargoUserController::class, 'getAllCargosOfUser'])->name('cargo-test');
+    /**
+     * Route Cargos x Permissions
+     */
+    Route::get('/cargos/{id}/permission/{idPermission}/detach', [PermissionCargoController::class, 'detachPermissionProfile'])->name('cargos.permissions.detach');
+    Route::post('/cargos/{id}/', [PermissionCargoController::class, 'attachPermissionProfile'])->name('cargos.permissions.attach');
+    Route::get('/cargos/{id}/create', [PermissionCargoController::class, 'permissionsAvailable'])->name('cargos.permissions.available');
+    Route::get('/cargos/{id}/permissions', [PermissionCargoController::class, 'permissions'])->name('cargos.permissions');
+    //Permission x Cargo
+    Route::get('/permissions/{id}/cargos', [PermissionCargoController::class, 'cargos'])->name('permissions.cargos');
 /**
  * Route Details Plan
  */

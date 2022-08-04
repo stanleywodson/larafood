@@ -22,6 +22,7 @@
 @section('content')
 
 <div class="card-body">
+    <p>Perfis Vinculados a esse plano</p>
     <!-- listagem dos planos -->
     <table class="table table-condensed">
         <thead>

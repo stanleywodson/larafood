@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\{User, Permission};
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +26,28 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $permissions = Permission::all();
+
+        foreach ($permissions as $permission){
+            Gate::define($permission->name, function (User $user) use ($permission){
+                return $user->hasPermission($permission->name);
+            });
+        }
+
+        //Gate de teste - verificando se tem a perfimissao de forma estatica
+//        Gate::define('categories', function (User $user){
+//            return $user->hasPermission('categories');
+//        });
+
+
+        Gate::define('owner', function (User $user, $object){
+            return $user->id === $object->user_id;
+        });
+//
+        Gate::before(function (User $user){
+           if($user->isAdmin()){
+               return true;
+           }
+        });
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
+use App\Models\Traits\UserACLTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, UserACLTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -63,11 +64,27 @@ class User extends Authenticatable
 
     return $results;
     }
+    public function cargosAttach()
+    {
+        $cargos = Cargo::whereNotIn('cargos.id', function ($query){
+            $query->select('cargo_user.cargo_id');
+            $query->from('cargo_user');
+            $query->whereRaw("cargo_user.user_id={$this->id}");
+        })->get();
+
+        return $cargos;
+    }
+
+
     /**
      * um tenant pertence a um usuário
      */
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+    public function cargos()
+    {
+        return $this->belongsToMany(Cargo::class);
     }
 }

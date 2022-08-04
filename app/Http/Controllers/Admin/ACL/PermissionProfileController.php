@@ -15,6 +15,7 @@ class PermissionProfileController extends Controller
     {
         $this->profile = $profile;
         $this->permission = $permission;
+        $this->middleware('can:permissions');
     }
 
     public function permissions($idProfile)
@@ -42,11 +43,11 @@ class PermissionProfileController extends Controller
             return redirect()->back();
 
          $permissions = $profile->permissionsAvailable();
-        
+
         return view('admin.pages.profiles.permissions.available', compact('profile', 'permissions'));
     }
 
-    //vincular uma permissão a certo perfil
+    //vincular uma ou mais  permissões a certo perfil
     public function attachPermissionProfile(Request $request, $idProfile)
     {
         if (!$profile = $this->profile->with('permissions')->find($idProfile))
@@ -59,7 +60,7 @@ class PermissionProfileController extends Controller
         $profile->permissions()->attach($request->permissions);
         return redirect()->route('profiles.permissions', $profile->id)->with('permissions', 'Viculado com sucesso!');
     }
-    //desvincular permissões de perfis
+    //desvincular uma ou mais permissões ao perfis
     public function detachPermissionProfile($idProfile, $idPermission)
     {
         $profile = $this->profile->find($idProfile);

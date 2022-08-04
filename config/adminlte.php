@@ -246,30 +246,56 @@ return [
             'text' => 'Perfis',
             'url'  => 'admin/profiles',
             'icon' => 'far fa-fw fa-address-book',
+            'can' => 'profiles'
+
+        ],
+        [
+            'text' => 'Cargos',
+            'url'  => 'admin/cargos',
+            'icon' => 'far fa-fw fa-work',
+            'can' => 'cargos'
 
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permission',
             'icon' => 'fas fa-fw fa-lock',
+            'can' => 'permissions'
 
         ],
         [
             'text' => 'Usuários',
             'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'users'
 
         ],
         [
             'text' => 'Categorias',
             'url'  => 'admin/categories',
             'icon' => 'fa fa-list',
+            'can' => 'categories'
 
         ],
         [
             'text' => 'Produtos',
             'url'  => 'admin/products',
-            'icon' => 'fa fa-products',
+            'icon' => 'fa fa-product-hunt',
+            'can' => 'products'
+
+        ],
+        [
+            'text' => 'Mesas',
+            'url'  => 'admin/tables',
+            'icon' => 'fa fa-table',
+            'can' => 'tables'
+
+        ],
+        [
+            'text' => 'Empresas',
+            'url'  => 'admin/tenants',
+            'icon' => 'fa fa-building',
+            'can' => 'tenants'
 
         ],
         // [

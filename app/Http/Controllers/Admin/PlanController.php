@@ -12,12 +12,13 @@ class PlanController extends Controller
     public function __construct(Plan $plan)
     {
         $this->repository = $plan;
+        //$this->middleware('can:plans');
     }
     //lista todos o planos na página inicial
     public function index()
     {
         $plans = $this->repository->all();
-    
+
         return view('admin.pages.plans.index',[
             'plans' => $plans,
         ]);
@@ -38,7 +39,7 @@ class PlanController extends Controller
     public function show($url)
     {
         $plan = $this->repository->where('url', $url)->first();
-        
+
         if(!$plan)
             return redirect()->back();
 
@@ -49,11 +50,12 @@ class PlanController extends Controller
     //filtra um plano pelo nome e pela descrição
     public function search(Request $request)
     {
-        $plans = $this->repository->search($request->filter);
+//        dd($request->filter);
+        return $plans = $this->repository->search($request->filter);
 
-        return view('admin.pages.plans.index',[
-            'plans' => $plans,
-        ]);
+//        return view('admin.pages.plans.index',[
+//            'plans' => $plans,
+//        ]);
     }
     // view do edit
     public function edit($url)
@@ -62,7 +64,7 @@ class PlanController extends Controller
             return redirect()->back();
 
             return view('admin.pages.plans.edit',[
-                'plan' => $plan]);   
+                'plan' => $plan]);
     }
     //fazer a edição e persistir os dados
     public function update(StoreUpdatePlan $request, $url)
@@ -80,18 +82,18 @@ class PlanController extends Controller
         public function destroy($url)
         {
             $plan = $this->repository
-            ->with('details')   
-            ->where('url', $url)->first();         
-            
+            ->with('details')
+            ->where('url', $url)->first();
+
             if(!$plan)
                 return redirect()->back();
-    
+
             if($plan->details->count() > 0)
             return redirect()->back()
-                             ->with('error', 'Não pode deletar esse plano existe detalhes relacionados a ele');    
-    
+                             ->with('error', 'Não pode deletar esse plano existe detalhes relacionados a ele');
+
             $plan->delete();
-    
+
             return redirect()->route('plans.index');
         }
 }

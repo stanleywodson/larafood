@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     protected $repository;
-    
+
     public function __construct(User $user)
     {
         $this->repository = $user;
+        $this->middleware('can:users');
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         //tenantUser refere-se ao escopo nao ao relacionamento ambos estão no model user
-        $users = $this->repository->tenantUser()->get();
+        $users = $this->repository->get();
         //$users = $this->repository->where('tenant_id', auth()->user()->tenant_id)->get(); //forma que traz o mesmo resultado de exemplo de cima
 
         return view('admin.pages.users.index', compact('users'));
@@ -57,7 +58,7 @@ class UserController extends Controller
     public function store(StoreUpdateusers $request)
     {
         $data = $request->all();
-        
+
         $data['tenant_id'] = auth()->user()->tenant->id;
         $data['password'] = Hash::make($data['password']);
 
@@ -74,10 +75,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
-    {     
+    {
         if(!$user = $this->repository->tenantUser()->with('tenant')->where('id', $id)->first())
             return redirect()->back();
-   
+
         return view('admin.pages.users.show', compact('user'));
     }
 
@@ -108,15 +109,15 @@ class UserController extends Controller
             return redirect()->back();
 
         $data = $request->only('name');
-        
+
         if($request->password){
             $data['password'] = Hash::make($request->password);
-            
+
         }
         $user->update($data);
 
         return redirect()->route('users.index')->with('update','Atualizado com sucesso!');
-        
+
     }
 
     /**
@@ -126,7 +127,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
-    {       
+    {
         if(!$user = $this->repository->tenantUser()->where('id', $id)->first())
             return redirect()->back();
 
