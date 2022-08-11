@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,6 +27,7 @@ class UserController extends Controller
     {
         //tenantUser refere-se ao escopo nao ao relacionamento ambos estão no model user
         $users = $this->repository->get();
+
         //$users = $this->repository->where('tenant_id', auth()->user()->tenant_id)->get(); //forma que traz o mesmo resultado de exemplo de cima
 
         return view('admin.pages.users.index', compact('users'));
@@ -33,6 +35,10 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
+        if ($request->filter == null) {
+            $request->session()->flash('error2', 'teste de texto2');
+            return redirect()->back();
+        }
 
         $users = $this->repository->search($request->filter);
 

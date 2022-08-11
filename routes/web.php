@@ -105,6 +105,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     /**
      * Route Cargos
      */
+    //Route::get('/cargos/pdf', [\App\Http\Controllers\Admin\ACL\CargoController::class, 'pdf'])->name('cargos.pdf');
     Route::any('/cargos/search', [\App\Http\Controllers\Admin\ACL\CargoController::class, 'search'])->name('cargos.search');
     Route::resource('/cargos', \App\Http\Controllers\Admin\ACL\CargoController::class);
     /**

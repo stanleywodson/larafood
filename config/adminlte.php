@@ -252,7 +252,7 @@ return [
         [
             'text' => 'Cargos',
             'url'  => 'admin/cargos',
-            'icon' => 'far fa-fw fa-work',
+            'icon' => 'far fa-fw fa-address-book',
             'can' => 'cargos'
 
         ],
@@ -280,7 +280,7 @@ return [
         [
             'text' => 'Produtos',
             'url'  => 'admin/products',
-            'icon' => 'fa fa-product-hunt',
+            'icon' => 'fa fa-list',
             'can' => 'products'
 
         ],

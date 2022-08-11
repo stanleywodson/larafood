@@ -9,7 +9,7 @@
         <h1>Cargos - <b>{{$user->name}}</b></h1>
         @include('admin.includes.alerts')
     </div>
-    <div class="col-6 col-md-2"><a href="{{ route('users.cargos.available', $user->id) }}" class="btn btn-dark">Adicionar - Cargo</a></div>
+    <div class="col-6 col-md-2"><a id="addcargo" href="{{ route('users.cargos.available', $user->id) }}" class="btn btn-dark">Adicionar - Cargo</a></div>
 </div>
 
 <ol class="breadcrumb">
@@ -116,6 +116,7 @@
                 }
             })
         });
+
 
     })
 </script>

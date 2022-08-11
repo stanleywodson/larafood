@@ -7,7 +7,6 @@
 <div class="row">
     <div class="col-md-10">
         <h1>Usuários <a href="{{route('users.create')}}" class="btn btn-dark"><i class="fa fa-plus-square"></i></a></h1>
-        @include('admin.includes.alerts')
     </div>
 </div>
 
@@ -20,6 +19,7 @@
 
 @section('content')
 <div class="card">
+    @include('admin.includes.alerts')
     <div class="card-header">
                 <!-- pesquisa usuários -->
                 <form method="POST" action="{{ route('users.search')}}" class="form form-inline">
@@ -34,7 +34,7 @@
 <div class="card-body">
 
     <!-- listagem dos planos -->
-    <table class="table table-condensed">
+    <table class="table table-condensed" id="table-user">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -42,7 +42,7 @@
                 <th>Ações</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
             @foreach($users as $user)
             <tr>
                 <td>{{ucwords($user->name)}}</td>
@@ -52,10 +52,8 @@
                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                     <a href="{{ route('users.cargos', $user->id) }}" class="btn btn-sm btn-secondary">vincular cargo</a>
-
                 </td>
             </tr>
-
             @endforeach
         </tbody>
     </table>
@@ -64,11 +62,26 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
-<script>
-    console.log('Hi!');
-</script>
+
+{{--    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>--}}
+{{--    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>--}}
+
+{{--<script>--}}
+{{--    $(function(){--}}
+{{--        $('#table-user').DataTable({--}}
+
+{{--            rowReorder: {--}}
+{{--                selector: 'tr'--}}
+{{--            },--}}
+{{--            columnDefs: [--}}
+{{--                { targets: 0, visible: false }--}}
+{{--            ]--}}
+{{--        })--}}
+
+{{--    })--}}
+{{--</script>--}}
 @stop

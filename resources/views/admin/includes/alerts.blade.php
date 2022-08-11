@@ -19,6 +19,10 @@
             </div>
             @endif
 
+            @if(session()->has('error2'))
+                <div class="alert alert-warning">{{session('error2')}}</div>
+            @endif
+
             @if(session('success'))
             <div class="alert alert-info">
                 {{session('success')}}
@@ -43,4 +47,3 @@
             </div>
             @endif
 
-            

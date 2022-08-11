@@ -6,6 +6,7 @@ use App\Models\Cargo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCargos;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CargoController extends Controller
 {
@@ -27,6 +28,15 @@ class CargoController extends Controller
 
         return view('admin.pages.cargos.index', compact('cargos'));
     }
+
+//    public function pdf()
+//    {
+//        $cargos = $this->repository->all();
+//
+////        $pdf = Pdf::loadView('admin.pages.cargos.index', $cargos);
+////        return $pdf->stream();
+//        return view('admin.pages.cargos.pdf', compact('cargos'));
+//    }
 
     public function search(Request $request)
     {

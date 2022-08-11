@@ -8,6 +8,7 @@
     <div class="col-md-10">
         <h1>Cargos</h1>
         @include('admin.includes.alerts')
+        <a href="{{route('cargos.pdf')}}" class="btn badge-dark">Gerar PDF</a>
     </div>
     <div class="col-6 col-md-2"><a href="{{route('cargos.create')}}" class="btn btn-dark">Adicionar - Cargo</a></div>
 </div>
@@ -54,6 +55,7 @@
                     <a href="{{ route('cargos.edit', $cargo->id) }}" class="btn btn-warning">EDITAR</a>
 {{--                    <a href="{{ route('cargos.plans', $cargo->id) }}" class="btn btn-info">PLANOS</a>--}}
                     <a href="{{ route('cargos.permissions', $cargo->id) }}" class="btn btn-success"><i class="fas fa-fw fa-lock"></i></a>
+
 
                 </td>
             </tr>
