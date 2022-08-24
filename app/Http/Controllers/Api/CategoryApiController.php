@@ -16,7 +16,8 @@ class CategoryApiController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function categoriesByTenants(Request $request)
+    //retorna todos as  categorias de um tenant
+    public function categoriesByTenant(Request $request)
     {
         return $this->categoryService->getCategoriesByTenantUuid($request->uuid);
     }

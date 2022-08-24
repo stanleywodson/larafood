@@ -21,15 +21,26 @@ class CategoryRepository implements CategoryRepositoryInterface
             ->where('tenants.uuid', $uuid)
             ->select('categories.*')
             ->get();
+//
+//        return DB::table($this->table)
+//            ->select('categories.*')
+//            ->join('tenants', function ($join) {
+//                $join->on('tenants.id', '=', 'categories.tenant_id')
+//                    ->where('tenants.uuid', $uuid)
+//                    ->where("$this->table.name", 'liquidos');
+//            })
+//            ->get();
 
         // TODO: Implement getCategoriesByTenantUuid() method.
     }
 
     // trará todas as categorias onde o tenant id for igual ao que for enviado.
-    public function getCategoriesByTenantId(int $id)
+    public function getCategoriesByTenantId(int $idTenant)
     {
-        return DB::table($this->table)->where('tenant_id', $id)->get();
+        return DB::table($this->table)->where('tenant_id', $idTenant)->get();
 
         // TODO: Implement getCategoriesByTenantId() method.
     }
+
 }
+
