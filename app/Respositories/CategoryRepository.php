@@ -17,17 +17,17 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function getCategoriesByTenantUuid(string $uuid)
     {
         return DB::table($this->table)
+            ->select('categories.*')
             ->join('tenants', 'tenants.id', '=', 'categories.tenant_id')
             ->where('tenants.uuid', $uuid)
-            ->select('categories.*')
             ->get();
-//
+
+
 //        return DB::table($this->table)
-//            ->select('categories.*')
-//            ->join('tenants', function ($join) {
+//            ->join('tenants', function($join) {
 //                $join->on('tenants.id', '=', 'categories.tenant_id')
 //                    ->where('tenants.uuid', $uuid)
-//                    ->where("$this->table.name", 'liquidos');
+//            ->select('categories.*');
 //            })
 //            ->get();
 
