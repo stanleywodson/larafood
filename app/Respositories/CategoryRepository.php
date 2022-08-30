@@ -42,5 +42,10 @@ class CategoryRepository implements CategoryRepositoryInterface
         // TODO: Implement getCategoriesByTenantId() method.
     }
 
+    public function getCategoryByUrl(string $url)
+    {
+        return DB::table($this->table)->where('url', $url)->first();
+    }
+
 }
 
