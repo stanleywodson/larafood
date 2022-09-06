@@ -29,8 +29,9 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 # Xdebug
-RUN pecl install xdebug-3.1.4 \
-&& docker-php-ext-enable xdebug    
+COPY 90-xdebug.ini "${PHP_INI_DIR}/conf.d"
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
 
 # Install redis
 RUN pecl install -o -f redis \

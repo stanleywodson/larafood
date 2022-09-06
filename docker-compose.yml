@@ -6,6 +6,8 @@ services:
         container_name: larafood_laravel9
         build:
             context: .
+            extra_hosts:
+                -   "host.docker.internal:host-gateway"
             dockerfile: Dockerfile
         image: madzone/laravel9-app
         restart: unless-stopped

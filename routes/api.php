@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryApiController;
+use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\TableApiController;
 use App\Http\Controllers\Api\TenantApiController;
 use Illuminate\Http\Request;
@@ -27,4 +28,9 @@ Route::get('/categories/', [CategoryApiController::class, 'categoriesByTenant'])
  */
 Route::get('/table/{identity}', [TableApiController::class, 'show']);
 Route::get('/tables/', [TableApiController::class, 'getTablesByTenantUuid']);
+/**
+ * Products
+ */
+Route::get('/product/{title}', [ProductApiController::class, 'show']);
+Route::get('/products/', [ProductApiController::class, 'getProductsByTenantId']);
 

@@ -23,14 +23,16 @@ use Illuminate\Support\Facades\Route;
  * Route Site
  */
     Route::get('/plan/{url}', [SiteController::class, 'plan'])->name('plan.subscription');
-    Route::get('/', [SiteController::class, 'index'])->name('site.home');
+    //Route::get('/', [SiteController::class, 'index'])->name('site.home');
+Route::get('/', function (){
+   $teste = 'stanley wodson';
+
+   dd($teste);
+});
+
 
 
 Route::prefix('admin')->middleware('auth')->group(function(){
-
-    Route::get('test-acl', function (){
-        dd(auth()->user()->permissions());
-    });
     /**
      * Route Tenant(Empresa)
      */

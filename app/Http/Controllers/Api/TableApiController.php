@@ -21,7 +21,7 @@ class TableApiController extends Controller
     public function getTablesByTenantUuid(TenantFormRequest $request)
     {
         $tables =  $this->tableService->getTablesByTenantUuid($request->token_company);
-        return TableResource::collection($tables);
+        return TableResource::collection($tables); // aqui usa se collection pq e um objeto
     }
 
     public function show($identity, TenantFormRequest $request)
@@ -29,6 +29,6 @@ class TableApiController extends Controller
         if (!$table = $this->tableService->getTableByIdentity($identity, $request->token_company))
             return response()->json(['message' => 'Table not found'], 404);
 
-        return new TableResource($table);
+        return new TableResource($table); // aqui usa se o new pq vem somente um resultado
     }
 }
