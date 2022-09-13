@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/tenant/{uuid}', [TenantApiController::class, 'show']);
 Route::get('/tenants', [TenantApiController::class, 'index']);
-
 /**
  * Categories
  */
@@ -33,4 +32,9 @@ Route::get('/tables/', [TableApiController::class, 'getTablesByTenantUuid']);
  */
 Route::get('/product/{title}', [ProductApiController::class, 'show']);
 Route::get('/products/', [ProductApiController::class, 'getProductsByTenantId']);
+/**
+ * Client
+ */
+Route::get('/client/{id}',[\App\Http\Controllers\Api\Auth\RegisterController::class, 'getClient']);
+Route::post('/client',[\App\Http\Controllers\Api\Auth\RegisterController::class, 'store']);
 

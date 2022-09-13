@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tenant;
 use App\Models\User;
+use App\Tenant\ManagerTenant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUsers;
@@ -26,7 +27,7 @@ class UserController extends Controller
     public function index()
     {
         //tenantUser refere-se ao escopo nao ao relacionamento ambos estão no model user
-        $users = $this->repository->get();
+        $users = $this->repository->tenantUser()->get();
 
         //$users = $this->repository->where('tenant_id', auth()->user()->tenant_id)->get(); //forma que traz o mesmo resultado de exemplo de cima
 
@@ -132,12 +133,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy(User $user)
     {
-        if(!$user = $this->repository->tenantUser()->where('id', $id)->first())
+        if(!$user = $this->repository->tenantUser()->where('id', $user->id)->first())
             return redirect()->back();
 
-        $user->delete();
-        return redirect()->route('users.index')->with('delete', 'Deletado com sucesso!');
+        if (in_array($user->email, config('tenant.admins'))){
+            return redirect()->route('users.index')->with('delete', 'Admin não pode ser deletado!');
+        }else{
+            $user->delete();
+            return redirect()->route('users.index')->with('delete', 'Deletado com sucesso!');
+        }
+
     }
 }

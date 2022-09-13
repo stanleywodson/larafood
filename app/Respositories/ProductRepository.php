@@ -25,22 +25,16 @@ class ProductRepository implements ProductRepositoryInterface
               ->where('categories.tenant_id', $idTenant)
               ->where(function ($query) use ($categories){
                     if ($categories != []){
-                    $query->whereIn('categories.url', $categories);
+                        $query->whereIn('categories.url', $categories);
                     }
               })
               ->get();
     }
 
-    /**
-     * @param string $title
-     * @param string $uuid
-     * @return Model|Builder|object|null
-     */
-    public function getProductByTitle(string $title, string $uuid)
+    public function getProductByTitle(string $title)
     {
         return DB::table($this->table)
             ->join('tenants', 'tenants.id', '=', 'products.tenant_id')
-            ->where('tenants.uuid', $uuid)
             ->where('products.title', $title)
             ->first();
     }

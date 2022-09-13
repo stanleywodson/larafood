@@ -23,14 +23,13 @@ use Illuminate\Support\Facades\Route;
  * Route Site
  */
     Route::get('/plan/{url}', [SiteController::class, 'plan'])->name('plan.subscription');
-    //Route::get('/', [SiteController::class, 'index'])->name('site.home');
-Route::get('/', function (){
-   $teste = 'stanley wodson';
+    Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
-   dd($teste);
+Route::get('teste', function (){
+    $client = \App\Models\Client::find(9);
+    $token = $client->createToken('token-teste');
+    dd($token->plainTextToken);
 });
-
-
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     /**

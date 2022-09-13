@@ -21,9 +21,9 @@ class ProductService
         return $this->productInterface->getProductsByTenantId($tenant->id, $categories);
     }
 
-    public function getProductByTitle(string $title, string $uuid)
+    public function getProductByTitle(string $title)
     {
-        return $this->productInterface->getProductByTitle($title, $uuid);
+        return $this->productInterface->getProductByTitle($title);
     }
 
 }
