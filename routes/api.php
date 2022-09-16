@@ -37,4 +37,14 @@ Route::get('/products/', [ProductApiController::class, 'getProductsByTenantId'])
  */
 Route::get('/client/{id}',[\App\Http\Controllers\Api\Auth\RegisterController::class, 'getClient']);
 Route::post('/client',[\App\Http\Controllers\Api\Auth\RegisterController::class, 'store']);
+/**
+ * Sactum Client
+ */
+Route::post('/sactum/token', [\App\Http\Controllers\Api\Auth\ClientController::class, 'auth']);
+
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function(){
+Route::get('/auth/me',[\App\Http\Controllers\Api\Auth\ClientController::class, 'me']);
+});
 
