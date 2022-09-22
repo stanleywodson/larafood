@@ -16,9 +16,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Tenant::class)->references('id')
-                ->on('tenants')
-                ->onDelete('cascade');
+            $table->foreignIdFor(Tenant::class)->references('id')->on('tenants')->onDelete('cascade');
+            $table->uuid('uuid');
             $table->string('title')->unique();
             $table->string('flag')->unique();
             $table->string('image');

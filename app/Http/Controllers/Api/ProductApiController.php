@@ -24,9 +24,9 @@ class ProductApiController extends Controller
         return ProductResource::collection($products);
     }
 
-    public function show(string $title, TenantFormRequest $request)
+    public function show(string $identify, TenantFormRequest $request)
     {
-        if(!$product = $this->productService->getProductByTitle($title, $request->token_company)){
+        if(!$product = $this->productService->getProductByUuid($identify, $request->token_company)){
 
             return response()->json(['message' => 'title dont send!'], 404);
         }

@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Tenant::class)->references('id')->on('tenants')->onDelete('cascade');
+            $table->uuid('uuid');
             $table->string('identity')->unique();
             $table->text('description')->nullable();
             $table->timestamps();

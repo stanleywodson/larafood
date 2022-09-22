@@ -30,7 +30,7 @@ Route::get('/tables/', [TableApiController::class, 'getTablesByTenantUuid']);
 /**
  * Products
  */
-Route::get('/product/{title}', [ProductApiController::class, 'show']);
+Route::get('/product/{identify}', [ProductApiController::class, 'show']);
 Route::get('/products/', [ProductApiController::class, 'getProductsByTenantId']);
 /**
  * Client

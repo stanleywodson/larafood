@@ -6,6 +6,6 @@ interface ProductRepositoryInterface
 {
     public function getProductsByTenantId(int $idTenant, array $categories);
 
-    public function getProductByTitle(string $title);
+    public function getProductByUuid(string $identify);
 
 }

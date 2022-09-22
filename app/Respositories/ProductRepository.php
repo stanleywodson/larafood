@@ -31,11 +31,11 @@ class ProductRepository implements ProductRepositoryInterface
               ->get();
     }
 
-    public function getProductByTitle(string $title)
+    public function getProductByUuid(string $identify)
     {
         return DB::table($this->table)
             ->join('tenants', 'tenants.id', '=', 'products.tenant_id')
-            ->where('products.title', $title)
+            ->where('products.uuid', $identify)
             ->first();
     }
 }

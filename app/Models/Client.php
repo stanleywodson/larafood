@@ -14,7 +14,7 @@ class Client extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password'
     ];
 
     use HasFactory;
