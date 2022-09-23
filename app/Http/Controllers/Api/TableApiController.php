@@ -26,7 +26,7 @@ class TableApiController extends Controller
 
     public function show($identity, TenantFormRequest $request)
     {
-        if (!$table = $this->tableService->getTableByIdentity($identity, $request->token_company))
+        if (!$table = $this->tableService->getTableByUuid($identity, $request->token_company))
             return response()->json(['message' => 'Table not found'], 404);
 
         return new TableResource($table); // aqui usa se o new pq vem somente um resultado

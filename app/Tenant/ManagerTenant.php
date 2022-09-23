@@ -8,12 +8,12 @@ class ManagerTenant
 {
     public function getTenantIdentify()
     {
-        return auth()->user()->tenant_id;
+        return auth()->check() ? auth()->user()->tenant_id : '';
     }
     //retorna um objeto de tenant
-    public function getTenant(): Tenant
+    public function getTenant()
     {
-        return auth()->user()->tenant;
+        return auth()->check() ? auth()->user()->tenant : '';
     }
     // verifica se o usuário autenticado tem permissão como super administrador
     public function isAdmin(): bool

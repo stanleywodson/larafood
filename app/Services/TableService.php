@@ -21,9 +21,9 @@ class TableService
         return $this->tableRepository->getTablesByTenantId($tenant->id);
     }
 
-    public function getTableByIdentity(string $identity, string $uuid)
+    public function getTableByUuid(string $identity)
     {
-        return $this->tableRepository->getTableByIdentity($identity, $uuid);
+        return $this->tableRepository->getTableByUuid($identity);
     }
 
 }
