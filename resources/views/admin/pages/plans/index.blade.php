@@ -49,7 +49,7 @@
                     <td style="width: 350px;">
                         <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary"><i class="fa fa-adjust" aria-hidden="true"></i></a>
                         <a href="{{route('plans.show', $plan->url)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning"><i class="fas fa-edit"></i></i></a>
+                        <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                         <a href="{{route('plans.profiles', $plan->id)}}" class="btn btn-secondary"><i class="far fa-fw fa-address-book"></i></a>
                     </td>
                 </tr>

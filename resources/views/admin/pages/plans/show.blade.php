@@ -3,7 +3,7 @@
 @section('title', 'Detalhes do Plano')
 
 @section('content_header')
-<h1>Informações - Plano</b></h1>
+<h1>Informações - Plano</h1>
 @include('admin.includes.alerts')
 @stop
 
@@ -22,6 +22,6 @@
         <button type="submit" class="btn btn-danger">Excluir</button>
     </form>
     </div>
-    
-</div> 
-@endsection  
+
+</div>
+@endsection
