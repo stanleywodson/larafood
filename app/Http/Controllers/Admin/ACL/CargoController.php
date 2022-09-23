@@ -29,14 +29,15 @@ class CargoController extends Controller
         return view('admin.pages.cargos.index', compact('cargos'));
     }
 
-//    public function pdf()
-//    {
-//        $cargos = $this->repository->all();
-//
-////        $pdf = Pdf::loadView('admin.pages.cargos.index', $cargos);
-////        return $pdf->stream();
-//        return view('admin.pages.cargos.pdf', compact('cargos'));
-//    }
+    public function pdf()
+    {
+        //$cargos = $this->repository->all();
+
+        $pdf = Pdf::loadView('admin.pages.cargos.pdf');
+        return $pdf->stream();
+
+        //return view('admin.pages.cargos.pdf', compact('cargos'));
+    }
 
     public function search(Request $request)
     {

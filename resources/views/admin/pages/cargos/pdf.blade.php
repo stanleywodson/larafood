@@ -11,17 +11,15 @@
         <thead>
             <tr>
                 <th>Cargo</th>
-                <th>Descrição</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($cargos as $cargo)
+
             <tr>
-                <td>{{ucwords($cargo->name)}}</td>
-                <td>{{$cargo->description}}</td>
+                <td>teste</td>
 
             </tr>
-            @endforeach
+
         </tbody>
     </table>
 
