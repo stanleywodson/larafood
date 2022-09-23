@@ -20,7 +20,7 @@ Route::get('/tenants', [TenantApiController::class, 'index']);
 /**
  * Categories
  */
-Route::get('/category/{url}', [CategoryApiController::class, 'getCategoryByUrl']);
+Route::get('/category/{identity}', [CategoryApiController::class, 'show']);
 Route::get('/categories/', [CategoryApiController::class, 'categoriesByTenant']);
 /**
  * Tables
