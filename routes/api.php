@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-
+/**
+ * Order(pedidos)
+ */
+Route::get('/orders/{identify}', [\App\Http\Controllers\Api\OrderApiController::class, 'show']);
+Route::post('/orders', [\App\Http\Controllers\Api\OrderApiController::class, 'store']);
 /**
  * Tenants
  */
@@ -41,6 +45,7 @@ Route::post('/client',[\App\Http\Controllers\Api\Auth\RegisterController::class,
  * Sactum Client
  */
 Route::post('/sactum/token', [\App\Http\Controllers\Api\Auth\ClientController::class, 'auth']);
+
 
 Route::group([
     'middleware' => ['auth:sanctum']

@@ -6,9 +6,11 @@ use App\Respositories\CategoryRepository;
 use App\Respositories\ClientRepository;
 use App\Respositories\Contracts\CategoryRepositoryInterface;
 use App\Respositories\Contracts\ClientRepositoryInterface;
+use App\Respositories\Contracts\OrderRepositoryInterface;
 use App\Respositories\Contracts\ProductRepositoryInterface;
 use App\Respositories\Contracts\TableRepositoryInterface;
 use App\Respositories\Contracts\TenantRepositoryInterface;
+use App\Respositories\OrderRepository;
 use App\Respositories\ProductRepository;
 use App\Respositories\TableRepository;
 use App\Respositories\TenantRepository;
@@ -52,6 +54,12 @@ class RepositoryServiceProvider extends ServiceProvider
 
             ClientRepositoryInterface::class,
             ClientRepository::class
+        );
+
+        $this->app->bind(
+
+            OrderRepositoryInterface::class,
+            OrderRepository::class
         );
     }
 

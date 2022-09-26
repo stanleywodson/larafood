@@ -31,9 +31,9 @@ class CargoController extends Controller
 
     public function pdf()
     {
-        //$cargos = $this->repository->all();
+        $cargos = $this->repository->all();
 
-        $pdf = PDF::loadView('admin.pages.cargos.pdf');
+        $pdf = PDF::loadView('admin.pages.cargos.pdf', compact('cargos'));
         return $pdf->stream();
 
         //return view('admin.pages.cargos.pdf', compact('cargos'));
