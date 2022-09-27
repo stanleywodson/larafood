@@ -14,9 +14,22 @@ class OrderRepository implements OrderRepositoryInterface
         $this->entity = $order;
     }
 
-    public function createNewOrder(string $identify, float $total, string $status, int $tenantId, $client = '', $tableId = '')
+    public function createNewOrder(string $identify, float $total, string $status, int $tenantId,string $comment = '', $clientId = '', $tableId = '')
     {
-        dd($identify,  $total, $status, $tenantId, $client = '', $tableId = '');
+        $data = [
+            'tenant_id' => $tenantId,
+            'identify' => $identify,
+            'total' => $total,
+            'status' => $status,
+            'comment' => $comment,
+        ];
+
+        //if ($comment){$data['comment'] = $comment;}
+        if ($clientId){$data['client_id'] = $clientId;}
+        if ($tableId){$data['table_id'] = $tableId;}
+
+        return $order = $this->entity->create($data);
+
 
     }
 
