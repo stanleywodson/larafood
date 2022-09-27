@@ -16,11 +16,12 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function createNewOrder(string $identify, float $total, string $status, int $tenantId, $client = '', $tableId = '')
     {
+        dd($identify,  $total, $status, $tenantId, $client = '', $tableId = '');
 
     }
 
     public function getOrderByIdentify(string $identify)
     {
-
+        return $this->entity->where('identify', $identify)->get();
     }
 }
