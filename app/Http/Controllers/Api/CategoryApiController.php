@@ -19,13 +19,6 @@ class CategoryApiController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    //retorna todos as  categorias de um tenant
-    public function categoriesByTenant(TenantFormRequest $request)
-    {
-        $categories =  $this->categoryService->getCategoriesByTenantUuid($request->token_company);
-        return CategoryResource::collection($categories);
-    }
-
     public function show(TenantFormRequest $request, $identify)
     {
         if (!$category = $this->categoryService->getCategoryByUuid($identify))
@@ -33,4 +26,12 @@ class CategoryApiController extends Controller
 
         return new CategoryResource($category);
     }
+
+    //retorna todos as  categorias de um tenant
+    public function categoriesByTenant(TenantFormRequest $request)
+    {
+        $categories =  $this->categoryService->getCategoriesByTenantUuid($request->token_company);
+        return CategoryResource::collection($categories);
+    }
+
 }

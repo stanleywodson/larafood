@@ -29,10 +29,12 @@ class OrderService
         $total = $this->getTotalOrder([]);
         $status = 'open';
         $tenantid = $this->getTenantIdOrder($order['token_company']);
+        //$comment = $order['comment'];
+        $comment = isset($order['comment'])? $order['comment'] : '';
         $clientId = $this->getClientIdOrder();
-        $tableId = $this->getTableOrder($order['table']);
+        $tableId = $this->getTableOrder($order['table'] ?? '');
 
-        $order = $this->orderRepository->createNewOrder($identify, $total, $status, $tenantid, $clientId, $tableId);
+        return $order = $this->orderRepository->createNewOrder($identify, $total, $status, $tenantid, $comment, $clientId, $tableId);
 
     }
 
@@ -45,6 +47,10 @@ class OrderService
         $characters = $smallLetters.$numbers;
 
         $identify = substr(str_shuffle($characters), 0, $qtyCaracters);
+
+        if ($this->orderRepository->getOrderByIdentify($identify)){
+            $identify = $this->getIdentifyOrder($qtyCaracters + 1);
+        }
 
         return $identify;
     }

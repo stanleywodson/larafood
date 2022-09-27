@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Order(pedidos)
  */
-Route::get('/orders/{identify}', [\App\Http\Controllers\Api\OrderApiController::class, 'show']);
+Route::get('/order/{identify}', [\App\Http\Controllers\Api\OrderApiController::class, 'show']);
 Route::post('/orders', [\App\Http\Controllers\Api\OrderApiController::class, 'store']);
 /**
  * Tenants
