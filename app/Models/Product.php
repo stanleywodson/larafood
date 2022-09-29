@@ -23,10 +23,6 @@ class Product extends Model
     /**
      * belongsToMany Produtos pertence a varias Categorias N:N
      */
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
 
     public function categoriesAvailable()
     {
@@ -37,5 +33,15 @@ class Product extends Model
         })->get();
 
         return $categories;
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
     }
 }

@@ -16,7 +16,8 @@ class OrderResource extends JsonResource
     {
         return [
 
-            'identify' => $this->identify
+            'identify' => $this->identify,
+            'total' => number_format($this->total,2, ',', '.')
         ];
     }
 }

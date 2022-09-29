@@ -35,7 +35,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function getProductByUuid(string $identify)
     {
         return DB::table($this->table)
-            ->join('tenants', 'tenants.id', '=', 'products.tenant_id')
+            //->join('tenants', 'tenants.id', '=', 'products.tenant_id')  o request já está requerindo o uuid.
             ->where('products.uuid', $identify)
             ->first();
     }
