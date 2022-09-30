@@ -15,7 +15,7 @@ class OrderRepository implements OrderRepositoryInterface
         $this->entity = $order;
     }
 
-    public function createNewOrder(string $identify, float $total, string $status, int $tenantId,string $comment = '', $clientId = '', $tableId = '', $productsOrder)
+    public function createNewOrder(string $identify, float $total, string $status, int $tenantId,string $comment = '', $clientId = '', $tableId = '')
     {
         $data = [
             'tenant_id' => $tenantId,
@@ -47,19 +47,44 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function registerProductsOrder(int $orderId, array $products)
     {
-        $orderProducts = [];
-        foreach ($products as $product){
-            array_push($orderProducts, [
-                'order_id'   => $orderId,
-                'product_id' => $product['id'],
-                'qty'        => $product['qty'],
-                'price'      => $product['price']
-            ]);
+        //1ª MANEIRA
+//        $orderProducts = [];
+//        foreach ($products as $product){
+//            array_push($orderProducts, [
+//                'order_id'   => $orderId,
+//                'product_id' => $product['id'],
+//                'qty'        => $product['qty'],
+//                'price'      => $product['price']
+//            ]);
+//
+//            DB::table('order_product')->insert($orderProducts);
+//        }
 
-            DB::table('order_product')->insert($orderProducts);
-        }
+        //2ª MANEIRA
+//        $order = $this->entity->find($orderId);
+//        $productsOrder = collect($products);
+//        dd($productsOrder);
+//        $order->products()->attach($productsOrder);
 
+        //3ª MANEIRA -- funcional
+//        $order = $this->entity->find($orderId);
+//        $productsOrder = collect($products)->map(function ($product){
+//            $product['product_id'] = $product['id'];
+//            unset($product['id']);
+//            return $product;
+//        });
+//        $order->products()->attach($productsOrder);
+
+        //4ª MANEIRA -- funcional
+        $order = $this->entity->find($orderId);
+        return $order->products()->sync($products);
     }
+
+    public function myOrders(int $clientId)
+    {
+        return $this->entity->where('client_id', $clientId)->paginate(1);
+    }
+
 
     public function getOrderByIdentify(string $identify)
     {

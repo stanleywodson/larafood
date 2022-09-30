@@ -18,14 +18,19 @@ class OrderApiController extends Controller
         $this->orderService = $service;
     }
 
-    public function show(TenantFormRequest $request, $identify)
+    public function show($identify)
     {
             if (!$order = $this->orderService->getOrderByIdentify($identify))
                 return response()->json(['message' => 'Order not found'], 404);
 
-            return $order;
-            //return new OrderResource($order);
 
+        return OrderResource::collection($order);
+    }
+
+    public function getOrdersFromClient()
+    {
+        $orders = $this->orderService->getOrdersFromClient();
+        return OrderResource::collection($orders);
     }
 
     public function store(StoreOrder $request)

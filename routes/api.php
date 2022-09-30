@@ -52,5 +52,10 @@ Route::group([
 ], function(){
 Route::get('/auth/me',[\App\Http\Controllers\Api\Auth\ClientController::class, 'me']);
 Route::post('/auth/logout',[\App\Http\Controllers\Api\Auth\ClientController::class, 'logout']);
+
+//Register whith Client Authorezed
+Route::post('auth/orders', [\App\Http\Controllers\Api\OrderApiController::class, 'store']);
+
+Route::get('auth/order-client', [\App\Http\Controllers\Api\OrderApiController::class, 'getOrdersFromClient']);
 });
 

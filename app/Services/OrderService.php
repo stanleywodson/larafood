@@ -38,7 +38,7 @@ class OrderService
         $clientId = $this->getClientIdOrder();
         $tableId = $this->getTableOrder($order['table'] ?? '');
 
-        $order = $this->orderRepository->createNewOrder($identify, $total, $status, $tenantid, $comment, $clientId, $tableId, $productsOrder);
+        $order = $this->orderRepository->createNewOrder($identify, $total, $status, $tenantid, $comment, $clientId, $tableId);
 
         $this->orderRepository->registerProductsOrder($order->id, $productsOrder);
 
@@ -64,6 +64,14 @@ class OrderService
         return $identify;
     }
 
+    public function getOrdersFromClient()
+    {
+        $clientId = $this->getClientIdOrder();
+        return $this->orderRepository->myOrders($clientId);
+
+
+    }
+
     private function getProductsByOrder(array $products): array
     {
         $productsOrder = [];
@@ -71,7 +79,8 @@ class OrderService
             $pro = $this->productRepository->getProductByUuid($product['identify']);
 
             array_push($productsOrder, [
-                'id'    => $pro->id,
+                //'id'    => $pro->id,
+                'product_id'    => $pro->id,
                 'qty'   => $product['qty'],
                 'price' => $pro->price
             ]);
