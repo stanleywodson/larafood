@@ -38,7 +38,11 @@ class OrderService
         $clientId = $this->getClientIdOrder();
         $tableId = $this->getTableOrder($order['table'] ?? '');
 
-        return $order = $this->orderRepository->createNewOrder($identify, $total, $status, $tenantid, $comment, $clientId, $tableId, $productsOrder);
+        $order = $this->orderRepository->createNewOrder($identify, $total, $status, $tenantid, $comment, $clientId, $tableId, $productsOrder);
+
+        $this->orderRepository->registerProductsOrder($order->id, $productsOrder);
+
+        return $order;
 
 
     }
