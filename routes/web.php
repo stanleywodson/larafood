@@ -25,11 +25,11 @@ use Illuminate\Support\Facades\Route;
     Route::get('/plan/{url}', [SiteController::class, 'plan'])->name('plan.subscription');
     Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
-Route::get('teste', function (){
-    $client = \App\Models\Client::find(9);
-    $token = $client->createToken('token-teste');
-    dd($token->plainTextToken);
-});
+//Route::get('teste', function (){
+//    $client = \App\Models\Client::find(9);
+//    $token = $client->createToken('token-teste');
+//    dd($token->plainTextToken);
+//});
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     /**

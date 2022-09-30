@@ -14,7 +14,7 @@ class OrderRepository implements OrderRepositoryInterface
         $this->entity = $order;
     }
 
-    public function createNewOrder(string $identify, float $total, string $status, int $tenantId,string $comment = '', $clientId = '', $tableId = '')
+    public function createNewOrder(string $identify, float $total, string $status, int $tenantId,string $comment = '', $clientId = '', $tableId = '', $productsOrder)
     {
         $data = [
             'tenant_id' => $tenantId,
@@ -28,7 +28,20 @@ class OrderRepository implements OrderRepositoryInterface
         if ($clientId){$data['client_id'] = $clientId;}
         if ($tableId){$data['table_id'] = $tableId;}
 
-        return $order = $this->entity->create($data);
+        if($order = $this->entity->create($data)){
+                $teste = [];
+                foreach ($productsOrder as $p){
+                    array_push($teste, [
+                        'product_id' => $p['id'],
+                        'qty' => $p['qty'],
+                        'price' => $p['price']
+                    ]);
+
+                    $teste2 = $order->products()->attach($teste);
+                }
+        }
+
+        return $order;
 
 
     }
