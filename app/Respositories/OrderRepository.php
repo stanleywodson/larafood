@@ -25,22 +25,8 @@ class OrderRepository implements OrderRepositoryInterface
             'comment'   => $comment,
         ];
 
-        //if ($comment){$data['comment'] = $comment;}
         if ($clientId){$data['client_id'] = $clientId;}
         if ($tableId){$data['table_id'] = $tableId;}
-
-//        if($order = $this->entity->create($data)){
-//                $teste = [];
-//                foreach ($productsOrder as $p){
-//                    array_push($teste, [
-//                        'product_id' => $p['id'],
-//                        'qty' => $p['qty'],
-//                        'price' => $p['price']
-//                    ]);
-//
-//                    $teste2 = $order->products()->attach($teste);
-//                }
-//        }
 
         return $order = $this->entity->create($data);
     }

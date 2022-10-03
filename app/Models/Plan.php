@@ -14,15 +14,15 @@ class Plan extends Model
 
     public function search($filter)
     {
-        $results = $this->where('name', 'LIKE', "%{$filter}%")
-                        ->orWhere('description', 'LIKE', "%{$filter}%")
-                        ->get();
+        if ($filter){
+        $results = $this->where('name', 'LIKE', "%{$filter}%")->get();
 
         return $results;
+        }
     }
 
     public function permissionsAvailable()
-    {        
+    {
         $profiles = Profile::whereNotIn('profiles.id', function($query) {
             $query->select('plan_profile.profile_id');
             $query->from('plan_profile');
@@ -47,5 +47,5 @@ class Plan extends Model
         return $this->hasMany(Tenant::class);
     }
 
-    
+
 }

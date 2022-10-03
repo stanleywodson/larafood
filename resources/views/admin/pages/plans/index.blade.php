@@ -41,21 +41,22 @@
             </tr>
             </thead>
             <tbody id="tbody">
-            @foreach($plans as $plan)
-                <tr>
-                    <td>{{ucwords($plan->name)}}</td>
-                    <td>R$ - {{number_format($plan->price, 2, ',','.')}}</td>
-                    <td>{{$plan->description}}</td>
-                    <td style="width: 350px;">
-                        <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary"><i class="fa fa-adjust" aria-hidden="true"></i></a>
-                        <a href="{{route('plans.show', $plan->url)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning"><i class="fas fa-edit"></i></i></a>
-                        <a href="{{route('plans.profiles', $plan->id)}}" class="btn btn-secondary"><i class="far fa-fw fa-address-book"></i></a>
-                    </td>
-                </tr>
-            @endforeach
+{{--            @foreach($plans as $plan)--}}
+{{--                <tr>--}}
+{{--                    <td>{{ucwords($plan->name)}}</td>--}}
+{{--                    <td>R$ - {{number_format($plan->price, 2, ',','.')}}</td>--}}
+{{--                    <td>{{$plan->description}}</td>--}}
+{{--                    <td style="width: 350px;">--}}
+{{--                        <a href="{{route('details.plans.index', $plan->url)}}" class="btn btn-primary"><i class="fa fa-adjust" aria-hidden="true"></i></a>--}}
+{{--                        <a href="{{route('plans.show', $plan->url)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>--}}
+{{--                        <a href="{{route('plans.edit', $plan->url)}}" class="btn btn-warning"><i class="fas fa-edit"></i></i></a>--}}
+{{--                        <a href="{{route('plans.profiles', $plan->id)}}" class="btn btn-secondary"><i class="far fa-fw fa-address-book"></i></a>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
+{{--            @endforeach--}}
             </tbody>
         </table>
+        <span id="message-error"></span>
     </div>
 @stop
 
@@ -83,26 +84,48 @@
                 $("#tbody").html(rows);
             }
             // trás resultados ao ir digitando
-            $( "#filter" ).keyup(function() {
+            {{--$( "#filter" ).keyup(function() {--}}
 
-                    try {
-                        const response = axios.post("{{route('plans.search')}}",{
-                            filter: $('#filter').val()
-                        }).then(function (response) {
-                            // if(response.data.length === 0) {
-                            //     console.log('sem resultado')
-                            // }
-                            table_data_row(response.data)
-                            console.log(response.data)
-                            })
-                    } catch (error) {
-                        //erro sempre cai aqui
+            {{--        try {--}}
+            {{--            const response = axios.post("{{route('plans.search')}}",{--}}
+            {{--                filter: $('#filter').val()--}}
+            {{--            }).then(function (response) {--}}
+            {{--                // if(response.data.length === 0) {--}}
+            {{--                //     console.log('sem resultado')--}}
+            {{--                // }--}}
+            {{--                table_data_row(response.data)--}}
+            {{--                console.log(response.data)--}}
+            {{--                })--}}
+            {{--        } catch (error) {--}}
+            {{--            //erro sempre cai aqui--}}
+            {{--        }--}}
+
+            {{--})--}}
+
+            // MESMA FUNÇÃO DA ANTERIOR USANDO ASYNC/AWAIT
+            async function teste() {
+                let filter = $("#filter").on('keyup', async function () {
+
+                    const response = await axios.post("{{route('plans.search')}}", {
+                        filter: filter.val()
+                    })
+                    console.log(response)
+                    if(response.data.length > 0){
+                        console.log(response.data)
+                        $('#message-error').html('')
+                        table_data_row(response.data)
+                    }else{
+                        table_data_row()
+                        $('#message-error').html('Nada encontrado!')
                     }
 
-            })
-        })
+                })
 
-            {{--function getAllData(){--}}
+        }
+        teste()
+    })
+
+        {{--function getAllData(){--}}
             {{--    axios.get("{{ route('plans.search') }}")--}}
             {{--        .then(function(res){--}}
             {{--            console.log(res.data);--}}

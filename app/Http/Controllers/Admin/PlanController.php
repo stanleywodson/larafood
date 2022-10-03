@@ -50,7 +50,7 @@ class PlanController extends Controller
     //filtra um plano pelo nome e pela descrição
     public function search(Request $request)
     {
-//        dd($request->filter);
+//
         return $plans = $this->repository->search($request->filter);
 
 //        return view('admin.pages.plans.index',[
