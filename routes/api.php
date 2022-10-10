@@ -57,5 +57,7 @@ Route::post('/auth/logout',[\App\Http\Controllers\Api\Auth\ClientController::cla
 Route::post('auth/orders', [\App\Http\Controllers\Api\OrderApiController::class, 'store']);
 
 Route::get('auth/order-client', [\App\Http\Controllers\Api\OrderApiController::class, 'getOrdersFromClient']);
+
+Route::post('auth/orders/{identify}/evaluations', [\App\Http\Controllers\Api\EvaluationApiController::class, 'store']);
 });
 
