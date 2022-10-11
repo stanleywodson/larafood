@@ -21,7 +21,9 @@ class EvaluationApiController extends Controller
     {
         $evaluationOrder = $request->only('stars', 'comments');
 
-        $evaluation =  $this->evaluationService->CreateNewEvaluationOrder($request->identify, $evaluationOrder);
+        if(!$evaluation =  $this->evaluationService->CreateNewEvaluationOrder($request->identifyOrder, $evaluationOrder)){
+            return response()->json(['message' => 'error'], 404);
+        }
 
         return new EvaluationResource($evaluation);
 

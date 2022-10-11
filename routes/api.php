@@ -58,6 +58,6 @@ Route::post('auth/orders', [\App\Http\Controllers\Api\OrderApiController::class,
 
 Route::get('auth/order-client', [\App\Http\Controllers\Api\OrderApiController::class, 'getOrdersFromClient']);
 
-Route::post('auth/orders/{identify}/evaluations', [\App\Http\Controllers\Api\EvaluationApiController::class, 'store']);
+Route::post('auth/orders/{identifyOrder}/evaluations', [\App\Http\Controllers\Api\EvaluationApiController::class, 'store']);
 });
 
